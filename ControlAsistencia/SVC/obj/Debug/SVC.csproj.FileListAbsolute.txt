@@ -1,0 +1,17 @@
+C:\Users\warlo\source\repos\ControlAsistencia\SVC\obj\Debug\SVC.csproj.CoreCompileInputs.cache
+C:\Users\warlo\source\repos\ControlAsistencia\SVC\obj\Debug\SVC.csprojAssemblyReference.cache
+C:\Users\warlo\source\repos\ControlAsistencia\SVC\bin\SVC.dll.config
+C:\Users\warlo\source\repos\ControlAsistencia\SVC\bin\SVC.dll
+C:\Users\warlo\source\repos\ControlAsistencia\SVC\bin\SVC.pdb
+C:\Users\warlo\source\repos\ControlAsistencia\SVC\bin\BLL.dll
+C:\Users\warlo\source\repos\ControlAsistencia\SVC\bin\DTO.dll
+C:\Users\warlo\source\repos\ControlAsistencia\SVC\bin\DAL.dll
+C:\Users\warlo\source\repos\ControlAsistencia\SVC\bin\BLL.pdb
+C:\Users\warlo\source\repos\ControlAsistencia\SVC\bin\DTO.pdb
+C:\Users\warlo\source\repos\ControlAsistencia\SVC\bin\DAL.pdb
+C:\Users\warlo\source\repos\ControlAsistencia\SVC\obj\Debug\SVC.csproj.CopyComplete
+C:\Users\warlo\source\repos\ControlAsistencia\SVC\obj\Debug\SVC.dll
+C:\Users\warlo\source\repos\ControlAsistencia\SVC\obj\Debug\SVC.pdb
+C:\Users\warlo\source\repos\ControlAsistencia\SVC\bin\NLog.config
+C:\Users\warlo\source\repos\ControlAsistencia\SVC\bin\NLog.dll
+C:\Users\warlo\source\repos\ControlAsistencia\SVC\bin\NLog.xml

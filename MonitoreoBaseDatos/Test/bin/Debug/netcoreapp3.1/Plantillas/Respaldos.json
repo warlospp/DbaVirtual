@@ -1,0 +1,4 @@
+﻿{
+  "@[Id DB] = ": "@database_id",
+  "@[DB] = ": "@name"
+}

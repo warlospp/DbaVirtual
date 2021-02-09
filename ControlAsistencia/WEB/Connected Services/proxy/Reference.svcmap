@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="7d6c0862-0a98-4baf-8d67-d0fb431f98a5" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:57608/ControlAsistencia.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ControlAsistencia.xsd" MetadataType="Schema" ID="e7c078ce-d0e3-4026-95b8-4f1bc4b9f9cf" SourceId="1" SourceUrl="http://localhost:57608/ControlAsistencia.svc?xsd=xsd2" />
+    <MetadataFile FileName="ControlAsistencia3.xsd" MetadataType="Schema" ID="29089bc6-2f2c-44bd-b415-3aed3fbdc869" SourceId="1" SourceUrl="http://localhost:57608/ControlAsistencia.svc?xsd=xsd3" />
+    <MetadataFile FileName="ControlAsistencia.wsdl" MetadataType="Wsdl" ID="aac40a6d-5385-4a75-8139-4cc05bcc2f45" SourceId="1" SourceUrl="http://localhost:57608/ControlAsistencia.svc?wsdl" />
+    <MetadataFile FileName="ControlAsistencia.disco" MetadataType="Disco" ID="a0d969b6-761b-4843-95be-916911d97ae9" SourceId="1" SourceUrl="http://localhost:57608/ControlAsistencia.svc?disco" />
+    <MetadataFile FileName="ControlAsistencia1.xsd" MetadataType="Schema" ID="8046f463-a634-4ad4-b092-11ad542758db" SourceId="1" SourceUrl="http://localhost:57608/ControlAsistencia.svc?xsd=xsd0" />
+    <MetadataFile FileName="ControlAsistencia2.xsd" MetadataType="Schema" ID="ade3204f-649f-4eb8-a41d-a286de833d9d" SourceId="1" SourceUrl="http://localhost:57608/ControlAsistencia.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

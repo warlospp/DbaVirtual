@@ -1,0 +1,9 @@
+C:\Users\warlo\source\repos\ControlAsistencia\DAL\bin\Debug\DAL.dll
+C:\Users\warlo\source\repos\ControlAsistencia\DAL\bin\Debug\DAL.pdb
+C:\Users\warlo\source\repos\ControlAsistencia\DAL\bin\Debug\DTO.dll
+C:\Users\warlo\source\repos\ControlAsistencia\DAL\bin\Debug\DTO.pdb
+C:\Users\warlo\source\repos\ControlAsistencia\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+C:\Users\warlo\source\repos\ControlAsistencia\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+C:\Users\warlo\source\repos\ControlAsistencia\DAL\obj\Debug\DAL.csproj.CopyComplete
+C:\Users\warlo\source\repos\ControlAsistencia\DAL\obj\Debug\DAL.dll
+C:\Users\warlo\source\repos\ControlAsistencia\DAL\obj\Debug\DAL.pdb

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>\\192.168.100.234\svcTelemetria</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/App_global.asax.compiled">
+      <publishTime>04/18/2020 12:58:39</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.dll">
+      <publishTime>04/18/2020 12:58:39</publishTime>
+    </File>
+    <File Include="bin/BLL.dll">
+      <publishTime>05/25/2020 11:45:51</publishTime>
+    </File>
+    <File Include="bin/BLL.pdb">
+      <publishTime>05/25/2020 11:45:51</publishTime>
+    </File>
+    <File Include="bin/CMN.dll">
+      <publishTime>05/24/2020 09:43:43</publishTime>
+    </File>
+    <File Include="bin/CMN.dll.config">
+      <publishTime>04/12/2020 10:55:19</publishTime>
+    </File>
+    <File Include="bin/CMN.pdb">
+      <publishTime>05/24/2020 09:43:43</publishTime>
+    </File>
+    <File Include="bin/Crc32C.NET.dll">
+      <publishTime>03/05/2014 22:22:56</publishTime>
+    </File>
+    <File Include="bin/DAL.dll">
+      <publishTime>05/25/2020 11:45:50</publishTime>
+    </File>
+    <File Include="bin/DAL.dll.config">
+      <publishTime>04/12/2020 11:21:56</publishTime>
+    </File>
+    <File Include="bin/DAL.pdb">
+      <publishTime>05/25/2020 11:45:50</publishTime>
+    </File>
+    <File Include="bin/DnsClient.dll">
+      <publishTime>03/31/2020 21:28:58</publishTime>
+    </File>
+    <File Include="bin/DTO.dll">
+      <publishTime>05/25/2020 11:45:49</publishTime>
+    </File>
+    <File Include="bin/DTO.pdb">
+      <publishTime>05/25/2020 11:45:49</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Bcl.AsyncInterfaces.dll">
+      <publishTime>11/15/2019 08:38:12</publishTime>
+    </File>
+    <File Include="bin/MongoDB.Bson.dll">
+      <publishTime>04/07/2020 19:26:58</publishTime>
+    </File>
+    <File Include="bin/MongoDB.Driver.Core.dll">
+      <publishTime>04/07/2020 19:27:16</publishTime>
+    </File>
+    <File Include="bin/MongoDB.Driver.dll">
+      <publishTime>04/07/2020 19:27:24</publishTime>
+    </File>
+    <File Include="bin/MongoDB.Libmongocrypt.dll">
+      <publishTime>11/13/2019 20:35:30</publishTime>
+    </File>
+    <File Include="bin/MySqlConnector.dll">
+      <publishTime>04/09/2020 22:46:26</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>11/09/2019 00:56:44</publishTime>
+    </File>
+    <File Include="bin/NLog.config">
+      <publishTime>04/12/2020 13:05:09</publishTime>
+    </File>
+    <File Include="bin/NLog.dll">
+      <publishTime>03/20/2020 16:52:32</publishTime>
+    </File>
+    <File Include="bin/Npgsql.dll">
+      <publishTime>02/20/2020 17:36:24</publishTime>
+    </File>
+    <File Include="bin/Npgsql.pdb">
+      <publishTime>02/20/2020 17:36:24</publishTime>
+    </File>
+    <File Include="bin/Pipelines.Sockets.Unofficial.dll">
+      <publishTime>04/05/2020 10:45:36</publishTime>
+    </File>
+    <File Include="bin/SharpCompress.dll">
+      <publishTime>02/27/2019 12:59:46</publishTime>
+    </File>
+    <File Include="bin/Snappy.NET.dll">
+      <publishTime>03/05/2014 22:41:22</publishTime>
+    </File>
+    <File Include="bin/StackExchange.Redis.dll">
+      <publishTime>04/05/2020 10:25:16</publishTime>
+    </File>
+    <File Include="bin/SVC.dll">
+      <publishTime>05/25/2020 11:48:29</publishTime>
+    </File>
+    <File Include="bin/SVC.pdb">
+      <publishTime>05/25/2020 11:48:29</publishTime>
+    </File>
+    <File Include="bin/System.Buffers.dll">
+      <publishTime>02/19/2020 10:05:18</publishTime>
+    </File>
+    <File Include="bin/System.IO.Pipelines.dll">
+      <publishTime>02/21/2020 03:57:20</publishTime>
+    </File>
+    <File Include="bin/System.Memory.dll">
+      <publishTime>04/17/2019 16:24:34</publishTime>
+    </File>
+    <File Include="bin/System.Numerics.Vectors.dll">
+      <publishTime>05/15/2018 13:29:44</publishTime>
+    </File>
+    <File Include="bin/System.Runtime.CompilerServices.Unsafe.dll">
+      <publishTime>02/21/2020 03:58:04</publishTime>
+    </File>
+    <File Include="bin/System.Text.Encodings.Web.dll">
+      <publishTime>09/13/2019 02:28:36</publishTime>
+    </File>
+    <File Include="bin/System.Text.Json.dll">
+      <publishTime>09/13/2019 02:29:04</publishTime>
+    </File>
+    <File Include="bin/System.Threading.Channels.dll">
+      <publishTime>11/15/2019 08:37:54</publishTime>
+    </File>
+    <File Include="bin/System.Threading.Tasks.Extensions.dll">
+      <publishTime>06/18/2019 12:08:48</publishTime>
+    </File>
+    <File Include="bin/System.ValueTuple.dll">
+      <publishTime>05/15/2018 13:29:52</publishTime>
+    </File>
+    <File Include="bin/Telegram.Bot.dll">
+      <publishTime>04/02/2020 12:11:58</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>04/18/2020 12:42:33</publishTime>
+    </File>
+    <File Include="NLog.config">
+      <publishTime>04/12/2020 13:05:09</publishTime>
+    </File>
+    <File Include="PrecompiledApp.config">
+      <publishTime>04/18/2020 12:58:38</publishTime>
+    </File>
+    <File Include="Telemetria.svc">
+      <publishTime>04/12/2020 12:43:23</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>05/24/2020 09:37:24</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

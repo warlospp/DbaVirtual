@@ -1,0 +1,7 @@
+C:\Users\warlo\source\repos\TelemetriaSensores\CMN\bin\Release\CMN.dll.config
+C:\Users\warlo\source\repos\TelemetriaSensores\CMN\bin\Release\CMN.dll
+C:\Users\warlo\source\repos\TelemetriaSensores\CMN\bin\Release\CMN.pdb
+C:\Users\warlo\source\repos\TelemetriaSensores\CMN\obj\Release\CMN.csproj.CoreCompileInputs.cache
+C:\Users\warlo\source\repos\TelemetriaSensores\CMN\obj\Release\CMN.dll
+C:\Users\warlo\source\repos\TelemetriaSensores\CMN\obj\Release\CMN.pdb
+C:\Users\warlo\source\repos\TelemetriaSensores\CMN\obj\Release\CMN.csprojAssemblyReference.cache

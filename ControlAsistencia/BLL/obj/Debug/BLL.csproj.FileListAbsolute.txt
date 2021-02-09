@@ -1,0 +1,11 @@
+C:\Users\warlo\source\repos\ControlAsistencia\BLL\obj\Debug\BLL.csprojAssemblyReference.cache
+C:\Users\warlo\source\repos\ControlAsistencia\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+C:\Users\warlo\source\repos\ControlAsistencia\BLL\bin\Debug\BLL.dll
+C:\Users\warlo\source\repos\ControlAsistencia\BLL\bin\Debug\BLL.pdb
+C:\Users\warlo\source\repos\ControlAsistencia\BLL\bin\Debug\DAL.dll
+C:\Users\warlo\source\repos\ControlAsistencia\BLL\bin\Debug\DTO.dll
+C:\Users\warlo\source\repos\ControlAsistencia\BLL\bin\Debug\DAL.pdb
+C:\Users\warlo\source\repos\ControlAsistencia\BLL\bin\Debug\DTO.pdb
+C:\Users\warlo\source\repos\ControlAsistencia\BLL\obj\Debug\BLL.csproj.CopyComplete
+C:\Users\warlo\source\repos\ControlAsistencia\BLL\obj\Debug\BLL.dll
+C:\Users\warlo\source\repos\ControlAsistencia\BLL\obj\Debug\BLL.pdb

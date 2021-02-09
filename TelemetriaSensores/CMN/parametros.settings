@@ -1,0 +1,72 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CMN" GeneratedClassName="parametros">
+  <Profiles />
+  <Settings>
+    <Setting Name="Minuto" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">M</Value>
+    </Setting>
+    <Setting Name="Segundo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">S</Value>
+    </Setting>
+    <Setting Name="Milisegundo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">MS</Value>
+    </Setting>
+    <Setting Name="MsSql" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">MsSql</Value>
+    </Setting>
+    <Setting Name="MySql" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">MySql</Value>
+    </Setting>
+    <Setting Name="PostgreSql" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">PostgreSql</Value>
+    </Setting>
+    <Setting Name="Humedad" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Humedad</Value>
+    </Setting>
+    <Setting Name="Temperatura" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Temperatura</Value>
+    </Setting>
+    <Setting Name="Minimo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">MIN</Value>
+    </Setting>
+    <Setting Name="Optimo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">OPT</Value>
+    </Setting>
+    <Setting Name="Maximo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">MAX</Value>
+    </Setting>
+    <Setting Name="Bajo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">BAJ</Value>
+    </Setting>
+    <Setting Name="Sobre" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">SOB</Value>
+    </Setting>
+    <Setting Name="ConsultarUmbral" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">sps_umbral</Value>
+    </Setting>
+    <Setting Name="ConsultarSensor" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">sps_sensor</Value>
+    </Setting>
+    <Setting Name="ColeccionTelemetria" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">telemetria</Value>
+    </Setting>
+    <Setting Name="ColeccionAuditoria" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">auditoria</Value>
+    </Setting>
+    <Setting Name="MongoDb" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">MongoDb</Value>
+    </Setting>
+    <Setting Name="Redis" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Redis</Value>
+    </Setting>
+    <Setting Name="Sql" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Sql</Value>
+    </Setting>
+    <Setting Name="NumeroDecimales" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">NumeroDecimales</Value>
+    </Setting>
+    <Setting Name="ConectorSql" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ConectorSql</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
