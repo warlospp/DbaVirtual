@@ -17,5 +17,13 @@
                 return parametros.Default.Temperatura;
             }
         }
+
+        public static string Presion
+        {
+            get
+            {
+                return parametros.Default.Presion;
+            }
+        }
     }
 }

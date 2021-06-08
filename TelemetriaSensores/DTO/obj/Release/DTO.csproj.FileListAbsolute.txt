@@ -3,4 +3,3 @@ C:\Users\warlo\source\repos\TelemetriaSensores\DTO\bin\Release\DTO.pdb
 C:\Users\warlo\source\repos\TelemetriaSensores\DTO\obj\Release\DTO.csproj.CoreCompileInputs.cache
 C:\Users\warlo\source\repos\TelemetriaSensores\DTO\obj\Release\DTO.dll
 C:\Users\warlo\source\repos\TelemetriaSensores\DTO\obj\Release\DTO.pdb
-C:\Users\warlo\source\repos\TelemetriaSensores\DTO\obj\Release\DTO.csprojAssemblyReference.cache

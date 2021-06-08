@@ -10,7 +10,6 @@ using System.Net.Http;
 using System.ServiceModel;
 using System.Text;
 using System.Threading;
-using System.Web.DynamicData;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -105,6 +104,20 @@ namespace SVC
                         }
                     }
                     else if (dto.strTipo == cmnTipo.Humedad)
+                    {
+                        sb.AppendLine();
+                        if (dto.strUmbral == cmnUmbral.Bajo)
+                        {
+                            sb.AppendFormat("<u>{0}</u>\t{1}:\t<code>{2}</code>{3}", dto.strTipo, "\xD83C\xDF1E", dto.douMetrica, dto.strUnidadMedida);
+                            boo = true;
+                        }
+                        else if (dto.strUmbral == cmnUmbral.Sobre)
+                        {
+                            sb.AppendFormat("<u>{0}</u>\t{1}:\t<code>{2}</code>{3}", dto.strTipo, "\xD83D\xDCA6", dto.douMetrica, dto.strUnidadMedida);
+                            boo = true;
+                        }
+                    }
+                    else if (dto.strTipo == cmnTipo.Presion)
                     {
                         sb.AppendLine();
                         if (dto.strUmbral == cmnUmbral.Bajo)

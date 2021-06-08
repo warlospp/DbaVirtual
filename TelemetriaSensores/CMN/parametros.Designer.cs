@@ -12,7 +12,7 @@ namespace CMN {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
     internal sealed partial class parametros : global::System.Configuration.ApplicationSettingsBase {
         
         private static parametros defaultInstance = ((parametros)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new parametros())));
@@ -218,6 +218,15 @@ namespace CMN {
         public string ConectorSql {
             get {
                 return ((string)(this["ConectorSql"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Presión")]
+        public string Presion {
+            get {
+                return ((string)(this["Presion"]));
             }
         }
     }

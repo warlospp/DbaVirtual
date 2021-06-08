@@ -219,12 +219,28 @@
             <param name="updatedFields">The updated fields.</param>
             <param name="removedFields">The removed fields.</param>
         </member>
+        <member name="M:MongoDB.Driver.ChangeStreamUpdateDescription.#ctor(MongoDB.Bson.BsonDocument,System.String[],MongoDB.Bson.BsonArray)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.ChangeStreamUpdateDescription" /> class.
+            </summary>
+            <param name="updatedFields">The updated fields.</param>
+            <param name="removedFields">The removed fields.</param>
+            <param name="truncatedArrays">The truncated arrays.</param>
+        </member>
         <member name="P:MongoDB.Driver.ChangeStreamUpdateDescription.RemovedFields">
             <summary>
             Gets the removed fields.
             </summary>
             <value>
             The removed fields.
+            </value>
+        </member>
+        <member name="P:MongoDB.Driver.ChangeStreamUpdateDescription.TruncatedArrays">
+            <summary>
+            Gets the truncated arrays.
+            </summary>
+            <value>
+            The truncated arrays.
             </value>
         </member>
         <member name="P:MongoDB.Driver.ChangeStreamUpdateDescription.UpdatedFields">
@@ -521,6 +537,38 @@
         <member name="M:MongoDB.Driver.CollectionNamespace.ToString">
             <inheritdoc/>
         </member>
+        <member name="T:MongoDB.Driver.Core.Authentication.AuthenticatorFactory">
+            <summary>
+            Represents an authenticator factory.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.AuthenticatorFactory.#ctor(System.Func{MongoDB.Driver.Core.Authentication.IAuthenticator})">
+            <summary>
+            Create an authenticatorFactory.
+            </summary>
+            <param name="authenticatorFactoryFunc">The authenticatorFactoryFunc.</param>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.AuthenticatorFactory.Create">
+            <inheritdoc/>
+        </member>
+        <member name="T:MongoDB.Driver.Core.Authentication.AwsSignatureVersion4">
+            <summary>
+            The AWS signature version 4.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.AwsSignatureVersion4.CreateAuthorizationRequest(System.DateTime,System.String,System.Security.SecureString,System.String,System.Byte[],System.String,System.String@,System.String@)">
+            <summary>
+            Creates authorization request.
+            </summary>
+            <param name="dateTime">The date time.</param>
+            <param name="accessKeyId">The access key id.</param>
+            <param name="secretAccessKey">The secret access key.</param>
+            <param name="sessionToken">The session token.</param>
+            <param name="salt">The salt.</param>
+            <param name="host">The host.</param>
+            <param name="authorizationHeader">The authorization header.</param>
+            <param name="timestamp">The timestamp.</param>
+        </member>
         <member name="T:MongoDB.Driver.Core.Authentication.DefaultAuthenticator">
             <summary>
             The default authenticator.
@@ -618,6 +666,29 @@
         <member name="P:MongoDB.Driver.Core.Authentication.GssapiAuthenticator.DatabaseName">
             <inheritdoc/>
         </member>
+        <member name="T:MongoDB.Driver.Core.Authentication.GssapiException">
+            <summary>
+            Thrown from a GSSAPI-related method.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.GssapiException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Authentication.GssapiException" /> class.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.GssapiException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Authentication.GssapiException" /> class.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.GssapiException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Authentication.GssapiException" /> class.
+            </summary>
+            <param name="info">The info.</param>
+            <param name="context">The context.</param>
+        </member>
         <member name="T:MongoDB.Driver.Core.Authentication.IAuthenticator">
             <summary>
             Represents a connection authenticator.
@@ -654,6 +725,97 @@
             </summary>
             <param name="isMasterCommand">Initial isMaster command.</param>
             <returns>Optionally mutated isMaster command.</returns>
+        </member>
+        <member name="T:MongoDB.Driver.Core.Authentication.IAuthenticatorFactory">
+            <summary>
+            Represents an authenticator factory.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.IAuthenticatorFactory.Create">
+            <summary>
+            Create an authenticator.
+            </summary>
+            <returns>The authenticator.</returns>
+        </member>
+        <member name="T:MongoDB.Driver.Core.Authentication.ISecurityContext">
+            <summary>
+            Represents the security context being used for authentication.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.ISecurityContext.Next(System.Byte[])">
+            <summary>
+            Negotiates the steps of an authentication handshake.
+            </summary>
+            <param name="challenge">Challenge received from the MongoDB server.</param>
+            <returns>Response to send back to the MongoDB server.</returns>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Authentication.ISecurityContext.IsInitialized">
+            <summary>
+            Whether the security context has been initialized.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.ISecurityContext.DecryptMessage(System.Int32,System.Byte[])">
+            <summary>
+            Decrypts ciphertext to plaintext.
+            </summary>
+            <param name="messageLength">Number of message bytes. Remaining bytes are the security trailer.</param>
+            <param name="encryptedBytes">Ciphertext to decrypt.</param>
+            <returns>Decrypted plaintext.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.ISecurityContext.EncryptMessage(System.Byte[])">
+            <summary>
+            Encrypts plaintext to ciphertext.
+            </summary>
+            <param name="plainTextBytes">Plaintext to encrypt.</param>
+            <returns>Encrypted ciphertext.</returns>
+        </member>
+        <member name="T:MongoDB.Driver.Core.Authentication.Libgssapi.LibgssapiException">
+            <summary>
+            Represents a Libgssapi exception.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.Libgssapi.LibgssapiException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Authentication.Libgssapi.LibgssapiException"/> class.
+            </summary>
+            <param name="message">Error message from libgssapi.</param>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.Libgssapi.LibgssapiException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Authentication.Libgssapi.LibgssapiException" /> class.
+            </summary>
+            <param name="info">The info.</param>
+            <param name="context">The context.</param>
+        </member>
+        <member name="T:MongoDB.Driver.Core.Authentication.MongoAWSAuthenticator">
+            <summary>
+            The Mongo AWS authenticator.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Authentication.MongoAWSAuthenticator.MechanismName">
+            <summary>
+            Gets the name of the mechanism.
+            </summary>
+            <value>
+            The name of the mechanism.
+            </value>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.MongoAWSAuthenticator.#ctor(MongoDB.Driver.Core.Authentication.UsernamePasswordCredential,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Authentication.MongoAWSAuthenticator"/> class.
+            </summary>
+            <param name="credential">The credentials.</param>
+            <param name="properties">The properties.</param>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.MongoAWSAuthenticator.#ctor(System.String,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Authentication.MongoAWSAuthenticator"/> class.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="properties">The properties.</param>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Authentication.MongoAWSAuthenticator.DatabaseName">
+            <inheritdoc/>
         </member>
         <member name="T:MongoDB.Driver.Core.Authentication.MongoDBCRAuthenticator">
             <summary>
@@ -790,14 +952,14 @@
             The connection identifier.
             </value>
         </member>
-        <member name="M:MongoDB.Driver.Core.Authentication.SaslAuthenticator.SaslConversation.Dispose">
-            <inheritdoc/>
-        </member>
         <member name="M:MongoDB.Driver.Core.Authentication.SaslAuthenticator.SaslConversation.RegisterItemForDisposal(System.IDisposable)">
             <summary>
             Registers the item for disposal.
             </summary>
             <param name="item">The disposable item.</param>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.SaslAuthenticator.SaslConversation.Dispose">
+            <inheritdoc/>
         </member>
         <member name="T:MongoDB.Driver.Core.Authentication.SaslAuthenticator.ISaslMechanism">
             <summary>
@@ -942,7 +1104,7 @@
             characters as defined by <a href="https://tools.ietf.org/html/rfc3454#appendix-C.7">RFC 3454, Appendix C.7</a>. 
             </summary>
             <param name="codepoint">The Unicode character's codepoint.</param>
-            <returns></returns>
+            <returns>True if the codepoint is inappropriate for canonical.</returns>
         </member>
         <member name="M:MongoDB.Driver.Core.Authentication.SaslPrepHelper.InappropriateForPlainText(System.Int32)">
             <summary>
@@ -950,7 +1112,7 @@
             by <a href="https://tools.ietf.org/html/rfc3454#appendix-C.6">RFC 3454, Appendix C.6</a>.
             </summary>
             <param name="codepoint">The Unicode character's codepoint.</param>
-            <returns></returns>
+            <returns>True if the codepoint is inappropriate for plain text.</returns>
         </member>
         <member name="M:MongoDB.Driver.Core.Authentication.SaslPrepHelper.IsDefined(System.Int32)">
             <summary>
@@ -1041,7 +1203,7 @@
             <a href="https://tools.ietf.org/html/rfc3454#appendix-C.9">RFC 3454, Appendix C.9</a>.
             </summary>
             <param name="codepoint">The Unicode character's codepoint.</param>
-            <returns></returns>
+            <returns>True if the codepoint is a tagging character.</returns>
         </member>
         <member name="T:MongoDB.Driver.Core.Authentication.ScramCache">
             <summary>
@@ -1052,16 +1214,16 @@
             <summary>
             Try to get a cached entry.
             </summary>
-            <param name="key"></param>
-            <param name="entry"></param>
-            <returns></returns>
+            <param name="key">The key.</param>
+            <param name="entry">The entry.</param>
+            <returns>True if the cache contained an entry for the key.</returns>
         </member>
         <member name="M:MongoDB.Driver.Core.Authentication.ScramCache.Add(MongoDB.Driver.Core.Authentication.ScramCacheKey,MongoDB.Driver.Core.Authentication.ScramCacheEntry)">
             <summary>
             Add a cached entry.
             </summary>
-            <param name="key"></param>
-            <param name="entry"></param>
+            <param name="key">The key.</param>
+            <param name="entry">The entry.</param>
         </member>
         <member name="T:MongoDB.Driver.Core.Authentication.ScramSha1Authenticator">
             <summary>
@@ -1160,6 +1322,9 @@
         <member name="P:MongoDB.Driver.Core.Authentication.ScramShaAuthenticator.DatabaseName">
             <inheritdoc/>
         </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.ScramShaAuthenticator.CustomizeInitialIsMasterCommand(MongoDB.Bson.BsonDocument)">
+            <inheritdoc/>
+        </member>
         <member name="T:MongoDB.Driver.Core.Authentication.Sspi.AuthIdentity">
             <summary>
             SEC_WINNT_AUTH_IDENTITY
@@ -1219,7 +1384,7 @@
             </summary>
             <param name="errorCode">The error code.</param>
             <param name="defaultMessage">The default message.</param>
-            <returns></returns>
+            <returns>A Win32Exception.</returns>
         </member>
         <member name="M:MongoDB.Driver.Core.Authentication.Sspi.NativeMethods.AcquireCredentialsHandle(System.String,System.String,MongoDB.Driver.Core.Authentication.Sspi.SecurityCredentialUse,System.IntPtr,MongoDB.Driver.Core.Authentication.Sspi.AuthIdentity,System.Int32,System.IntPtr,MongoDB.Driver.Core.Authentication.Sspi.SspiHandle@,System.Int64@)">
             <summary>
@@ -1412,7 +1577,7 @@
             <summary>
             To the byte array.
             </summary>
-            <returns></returns>
+            <returns>A byte array.</returns>
             <exception cref="T:System.InvalidOperationException">Object has already been disposed!!!</exception>
         </member>
         <member name="T:MongoDB.Driver.Core.Authentication.Sspi.SecurityBufferType">
@@ -1449,24 +1614,6 @@
             <summary>
             SECBUFFER_STREAM
             </summary>
-        </member>
-        <member name="T:MongoDB.Driver.Core.Authentication.Sspi.SecurityContext">
-            <summary>
-            A wrapper around the SspiHandle structure specifically used as a security context handle.
-            </summary>
-        </member>
-        <member name="T:MongoDB.Driver.Core.Authentication.Sspi.SecurityCredential">
-            <summary>
-            A wrapper around the SspiHandle structure specifically used as a credential handle.
-            </summary>
-        </member>
-        <member name="M:MongoDB.Driver.Core.Authentication.Sspi.SecurityCredential.ReleaseHandle">
-            <summary>
-            When overridden in a derived class, executes the code required to free the handle.
-            </summary>
-            <returns>
-            true if the handle is released successfully; otherwise, in the event of a catastrophic failure, false. In this case, it generates a releaseHandleFailed MDA Managed Debugging Assistant.
-            </returns>
         </member>
         <member name="T:MongoDB.Driver.Core.Authentication.Sspi.SecurityCredentialUse">
             <summary>
@@ -1551,6 +1698,24 @@
             <summary>
             Kerberos
             </summary>
+        </member>
+        <member name="T:MongoDB.Driver.Core.Authentication.Sspi.SspiSecurityContext">
+            <summary>
+            A wrapper around the SspiHandle structure specifically used as a security context handle.
+            </summary>
+        </member>
+        <member name="T:MongoDB.Driver.Core.Authentication.Sspi.SspiSecurityCredential">
+            <summary>
+            A wrapper around the SspiHandle structure specifically used as a credential handle.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Authentication.Sspi.SspiSecurityCredential.ReleaseHandle">
+            <summary>
+            When overridden in a derived class, executes the code required to free the handle.
+            </summary>
+            <returns>
+            true if the handle is released successfully; otherwise, in the event of a catastrophic failure, false. In this case, it generates a releaseHandleFailed MDA Managed Debugging Assistant.
+            </returns>
         </member>
         <member name="T:MongoDB.Driver.Core.Authentication.Sspi.Win32Exception">
             <summary>
@@ -2417,6 +2582,27 @@
             <param name="cancellationToken">The cancellation token.</param>
             <returns>A Task that represents the KillCursors protocol.</returns>
         </member>
+        <member name="M:MongoDB.Driver.Core.Bindings.IChannel.Query``1(MongoDB.Driver.CollectionNamespace,MongoDB.Bson.BsonDocument,MongoDB.Bson.BsonDocument,MongoDB.Bson.IO.IElementNameValidator,System.Int32,System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,MongoDB.Bson.Serialization.IBsonSerializer{``0},MongoDB.Driver.Core.WireProtocol.Messages.Encoders.MessageEncoderSettings,System.Threading.CancellationToken)">
+            <summary>
+            Executes a Query protocol.
+            </summary>
+            <typeparam name="TDocument">The type of the document.</typeparam>
+            <param name="collectionNamespace">The collection namespace.</param>
+            <param name="query">The query.</param>
+            <param name="fields">The fields.</param>
+            <param name="queryValidator">The query validator.</param>
+            <param name="skip">The number of documents to skip.</param>
+            <param name="batchSize">The size of a batch.</param>
+            <param name="slaveOk">if set to <c>true</c> sets the SlaveOk bit to true in the query message sent to the server.</param>
+            <param name="partialOk">if set to <c>true</c> the server is allowed to return partial results if any shards are unavailable.</param>
+            <param name="noCursorTimeout">if set to <c>true</c> the server will not timeout the cursor.</param>
+            <param name="tailableCursor">if set to <c>true</c> the query should return a tailable cursor.</param>
+            <param name="awaitData">if set to <c>true</c> the server should await awhile before returning an empty batch for a tailable cursor.</param>
+            <param name="serializer">The serializer.</param>
+            <param name="messageEncoderSettings">The message encoder settings.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The result of the Insert protocol.</returns>
+        </member>
         <member name="M:MongoDB.Driver.Core.Bindings.IChannel.Query``1(MongoDB.Driver.CollectionNamespace,MongoDB.Bson.BsonDocument,MongoDB.Bson.BsonDocument,MongoDB.Bson.IO.IElementNameValidator,System.Int32,System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,MongoDB.Bson.Serialization.IBsonSerializer{``0},MongoDB.Driver.Core.WireProtocol.Messages.Encoders.MessageEncoderSettings,System.Threading.CancellationToken)">
             <summary>
             Executes a Query protocol.
@@ -2438,6 +2624,27 @@
             <param name="messageEncoderSettings">The message encoder settings.</param>
             <param name="cancellationToken">The cancellation token.</param>
             <returns>The result of the Insert protocol.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Bindings.IChannel.QueryAsync``1(MongoDB.Driver.CollectionNamespace,MongoDB.Bson.BsonDocument,MongoDB.Bson.BsonDocument,MongoDB.Bson.IO.IElementNameValidator,System.Int32,System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,MongoDB.Bson.Serialization.IBsonSerializer{``0},MongoDB.Driver.Core.WireProtocol.Messages.Encoders.MessageEncoderSettings,System.Threading.CancellationToken)">
+            <summary>
+            Executes a Query protocol.
+            </summary>
+            <typeparam name="TDocument">The type of the document.</typeparam>
+            <param name="collectionNamespace">The collection namespace.</param>
+            <param name="query">The query.</param>
+            <param name="fields">The fields.</param>
+            <param name="queryValidator">The query validator.</param>
+            <param name="skip">The number of documents to skip.</param>
+            <param name="batchSize">The size of a batch.</param>
+            <param name="slaveOk">if set to <c>true</c> sets the SlaveOk bit to true in the query message sent to the server.</param>
+            <param name="partialOk">if set to <c>true</c> the server is allowed to return partial results if any shards are unavailable.</param>
+            <param name="noCursorTimeout">if set to <c>true</c> the server will not timeout the cursor.</param>
+            <param name="tailableCursor">if set to <c>true</c> the query should return a tailable cursor.</param>
+            <param name="awaitData">if set to <c>true</c> the server should await awhile before returning an empty batch for a tailable cursor.</param>
+            <param name="serializer">The serializer.</param>
+            <param name="messageEncoderSettings">The message encoder settings.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>A Task whose result is the result of the Insert protocol.</returns>
         </member>
         <member name="M:MongoDB.Driver.Core.Bindings.IChannel.QueryAsync``1(MongoDB.Driver.CollectionNamespace,MongoDB.Bson.BsonDocument,MongoDB.Bson.BsonDocument,MongoDB.Bson.IO.IElementNameValidator,System.Int32,System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,MongoDB.Bson.Serialization.IBsonSerializer{``0},MongoDB.Driver.Core.WireProtocol.Messages.Encoders.MessageEncoderSettings,System.Threading.CancellationToken)">
             <summary>
@@ -3315,6 +3522,16 @@
             <param name="type">The type.</param>
             <param name="servers">The servers.</param>
         </member>
+        <member name="M:MongoDB.Driver.Core.Clusters.ClusterDescription.#ctor(MongoDB.Driver.Core.Clusters.ClusterId,System.Nullable{System.Boolean},System.Exception,MongoDB.Driver.Core.Clusters.ClusterType,System.Collections.Generic.IEnumerable{MongoDB.Driver.Core.Servers.ServerDescription})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Clusters.ClusterDescription" /> class.
+            </summary>
+            <param name="clusterId">The cluster identifier.</param>
+            <param name="directConnection">Whether to make a direct connection.</param>
+            <param name="dnsMonitorException">The last DNS monitor exception (null if there was none).</param>
+            <param name="type">The type.</param>
+            <param name="servers">The servers.</param>
+        </member>
         <member name="P:MongoDB.Driver.Core.Clusters.ClusterDescription.ClusterId">
             <summary>
             Gets the cluster identifier.
@@ -3323,6 +3540,16 @@
         <member name="P:MongoDB.Driver.Core.Clusters.ClusterDescription.ConnectionMode">
             <summary>
             Gets the connection mode.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Clusters.ClusterDescription.ConnectionModeSwitch">
+            <summary>
+            Gets the connection mode switch.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Clusters.ClusterDescription.DirectConnection">
+            <summary>
+            Gets the DirectConnection.
             </summary>
         </member>
         <member name="P:MongoDB.Driver.Core.Clusters.ClusterDescription.DnsMonitorException">
@@ -3337,6 +3564,11 @@
             <value>
               <c>true</c> if this cluster is compatible with the driver; otherwise, <c>false</c>.
             </value>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Clusters.ClusterDescription.IsDirectConnection">
+            <summary>
+            Gets whether the connection mode or the direct connection flag are configured as a direct connection.
+            </summary>
         </member>
         <member name="P:MongoDB.Driver.Core.Clusters.ClusterDescription.LogicalSessionTimeout">
             <summary>
@@ -3500,6 +3732,26 @@
         <member name="F:MongoDB.Driver.Core.Clusters.ClusterType.Sharded">
             <summary>
             The cluster is a sharded cluster.
+            </summary>
+        </member>
+        <member name="T:MongoDB.Driver.Core.Clusters.ConnectionModeSwitch">
+            <summary>
+            Determine whether to use legacy ConnectionMode or DirectConnection.
+            </summary>
+        </member>
+        <member name="F:MongoDB.Driver.Core.Clusters.ConnectionModeSwitch.NotSet">
+            <summary>
+            The connectionMode is not specified.
+            </summary>
+        </member>
+        <member name="F:MongoDB.Driver.Core.Clusters.ConnectionModeSwitch.UseConnectionMode">
+            <summary>
+            The legacy connectionMode.
+            </summary>
+        </member>
+        <member name="F:MongoDB.Driver.Core.Clusters.ConnectionModeSwitch.UseDirectConnection">
+            <summary>
+            The connectionMode based on directConnection.
             </summary>
         </member>
         <member name="T:MongoDB.Driver.Core.Clusters.CryptClientCreator">
@@ -3936,6 +4188,11 @@
             The content of the message is compressed using zlib. 
             </summary>
         </member>
+        <member name="F:MongoDB.Driver.Core.Compression.CompressorType.ZStandard">
+            <summary>
+            The content of the message is compressed using zstandard. 
+            </summary>
+        </member>
         <member name="T:MongoDB.Driver.Core.Compression.ICompressor">
             <summary>
             Represents a compressor.
@@ -3994,6 +4251,26 @@
         </member>
         <member name="M:MongoDB.Driver.Core.Compression.ZlibCompressor.Decompress(System.IO.Stream,System.IO.Stream)">
             <inheritdoc />
+        </member>
+        <member name="P:MongoDB.Driver.Core.Compression.Zstandard.ZstandardStream.StreamReadHelper.ReadingState.DataPosition">
+            <summary>
+            Saves a position between different Read calls.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Compression.Zstandard.ZstandardStream.StreamReadHelper.ReadingState.IsDataDepleted">
+            <summary>
+            Shows whether the last attempt to read data from the stream contained records or no. <c>false</c> if no.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Compression.Zstandard.ZstandardStream.StreamReadHelper.ReadingState.LastReadDataSize">
+            <summary>
+            The size of the last fetched data from the stream.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Compression.Zstandard.ZstandardStream.StreamReadHelper.ReadingState.SkipDataReading">
+            <summary>
+            Determines whether stream.Read should be skipped until the internal buffer is depleted.
+            </summary>
         </member>
         <member name="T:MongoDB.Driver.Core.Configuration.ClusterBuilder">
             <summary>
@@ -4133,13 +4410,16 @@
             Represents settings for a cluster.
             </summary>
         </member>
-        <member name="M:MongoDB.Driver.Core.Configuration.ClusterSettings.#ctor(MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ClusterConnectionMode},MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{System.Net.EndPoint}},MongoDB.Driver.Optional{System.Collections.Generic.IReadOnlyDictionary{System.String,System.Collections.Generic.IReadOnlyDictionary{System.String,System.Object}}},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.String},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ServerSelectors.IServerSelector},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ServerSelectors.IServerSelector},MongoDB.Driver.Optional{System.Collections.Generic.IReadOnlyDictionary{System.String,MongoDB.Bson.BsonDocument}},MongoDB.Driver.Optional{MongoDB.Driver.Core.Configuration.ConnectionStringScheme})">
+        <member name="M:MongoDB.Driver.Core.Configuration.ClusterSettings.#ctor(MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ClusterConnectionMode},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ConnectionModeSwitch},MongoDB.Driver.Optional{System.Nullable{System.Boolean}},MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{System.Net.EndPoint}},MongoDB.Driver.Optional{System.Collections.Generic.IReadOnlyDictionary{System.String,System.Collections.Generic.IReadOnlyDictionary{System.String,System.Object}}},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.String},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ServerSelectors.IServerSelector},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ServerSelectors.IServerSelector},MongoDB.Driver.Optional{System.Collections.Generic.IReadOnlyDictionary{System.String,MongoDB.Bson.BsonDocument}},MongoDB.Driver.Optional{MongoDB.Driver.Core.Configuration.ConnectionStringScheme})">
             <summary>
             Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Configuration.ClusterSettings"/> class.
             </summary>
             <param name="connectionMode">The connection mode.</param>
+            <param name="connectionModeSwitch">The connection mode switch.</param>
+            <param name="directConnection">The directConnection.</param>
             <param name="endPoints">The end points.</param>
             <param name="kmsProviders">The kms providers.</param>
+            <param name="localThreshold">The local threshold.</param>
             <param name="maxServerSelectionWaitQueueSize">Maximum size of the server selection wait queue.</param>
             <param name="replicaSetName">Name of the replica set.</param>
             <param name="serverSelectionTimeout">The server selection timeout.</param>
@@ -4156,6 +4436,16 @@
             The connection mode.
             </value>
         </member>
+        <member name="P:MongoDB.Driver.Core.Configuration.ClusterSettings.ConnectionModeSwitch">
+            <summary>
+            Gets the connection mode switch.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Configuration.ClusterSettings.DirectConnection">
+            <summary>
+            Gets the DirectConnection.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.Core.Configuration.ClusterSettings.EndPoints">
             <summary>
             Gets the end points.
@@ -4170,6 +4460,14 @@
             </summary>
             <value>
             The kms providers.
+            </value>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Configuration.ClusterSettings.LocalThreshold">
+            <summary>
+            Gets the local threshold.
+            </summary>
+            <value>
+            The local threshold.
             </value>
         </member>
         <member name="P:MongoDB.Driver.Core.Configuration.ClusterSettings.MaxServerSelectionWaitQueueSize">
@@ -4228,13 +4526,16 @@
             The post server selector.
             </value>
         </member>
-        <member name="M:MongoDB.Driver.Core.Configuration.ClusterSettings.With(MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ClusterConnectionMode},MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{System.Net.EndPoint}},MongoDB.Driver.Optional{System.Collections.Generic.IReadOnlyDictionary{System.String,System.Collections.Generic.IReadOnlyDictionary{System.String,System.Object}}},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.String},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ServerSelectors.IServerSelector},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ServerSelectors.IServerSelector},MongoDB.Driver.Optional{System.Collections.Generic.IReadOnlyDictionary{System.String,MongoDB.Bson.BsonDocument}},MongoDB.Driver.Optional{MongoDB.Driver.Core.Configuration.ConnectionStringScheme})">
+        <member name="M:MongoDB.Driver.Core.Configuration.ClusterSettings.With(MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ClusterConnectionMode},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ConnectionModeSwitch},MongoDB.Driver.Optional{System.Nullable{System.Boolean}},MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{System.Net.EndPoint}},MongoDB.Driver.Optional{System.Collections.Generic.IReadOnlyDictionary{System.String,System.Collections.Generic.IReadOnlyDictionary{System.String,System.Object}}},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.String},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ServerSelectors.IServerSelector},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ServerSelectors.IServerSelector},MongoDB.Driver.Optional{System.Collections.Generic.IReadOnlyDictionary{System.String,MongoDB.Bson.BsonDocument}},MongoDB.Driver.Optional{MongoDB.Driver.Core.Configuration.ConnectionStringScheme})">
             <summary>
             Returns a new ClusterSettings instance with some settings changed.
             </summary>
             <param name="connectionMode">The connection mode.</param>
+            <param name="connectionModeSwitch">The connection mode switch.</param>
+            <param name="directConnection">The directConnection.</param>
             <param name="endPoints">The end points.</param>
             <param name="kmsProviders">The kms providers.</param>
+            <param name="localThreshold">The local threshold.</param>
             <param name="maxServerSelectionWaitQueueSize">Maximum size of the server selection wait queue.</param>
             <param name="replicaSetName">Name of the replica set.</param>
             <param name="serverSelectionTimeout">The server selection timeout.</param>
@@ -4342,11 +4643,11 @@
             Represents settings for a connection.
             </summary>
         </member>
-        <member name="M:MongoDB.Driver.Core.Configuration.ConnectionSettings.#ctor(MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{MongoDB.Driver.Core.Authentication.IAuthenticator}},MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{MongoDB.Driver.Core.Configuration.CompressorConfiguration}},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.String})">
+        <member name="M:MongoDB.Driver.Core.Configuration.ConnectionSettings.#ctor(MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{MongoDB.Driver.Core.Authentication.IAuthenticatorFactory}},MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{MongoDB.Driver.Core.Configuration.CompressorConfiguration}},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.String})">
             <summary>
             Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Configuration.ConnectionSettings" /> class.
             </summary>
-            <param name="authenticators">The authenticators.</param>
+            <param name="authenticatorFactories">The authenticator factories.</param>
             <param name="compressors">The compressors.</param>
             <param name="maxIdleTime">The maximum idle time.</param>
             <param name="maxLifeTime">The maximum life time.</param>
@@ -4360,12 +4661,12 @@
             The name of the application.
             </value>
         </member>
-        <member name="P:MongoDB.Driver.Core.Configuration.ConnectionSettings.Authenticators">
+        <member name="P:MongoDB.Driver.Core.Configuration.ConnectionSettings.AuthenticatorFactories">
             <summary>
-            Gets the authenticators.
+            Gets the authenticator factories.
             </summary>
             <value>
-            The authenticators.
+            The authenticator factories.
             </value>
         </member>
         <member name="P:MongoDB.Driver.Core.Configuration.ConnectionSettings.Compressors">
@@ -4392,11 +4693,11 @@
             The maximum life time.
             </value>
         </member>
-        <member name="M:MongoDB.Driver.Core.Configuration.ConnectionSettings.With(MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{MongoDB.Driver.Core.Authentication.IAuthenticator}},MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{MongoDB.Driver.Core.Configuration.CompressorConfiguration}},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.String})">
+        <member name="M:MongoDB.Driver.Core.Configuration.ConnectionSettings.With(MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{MongoDB.Driver.Core.Authentication.IAuthenticatorFactory}},MongoDB.Driver.Optional{System.Collections.Generic.IEnumerable{MongoDB.Driver.Core.Configuration.CompressorConfiguration}},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.String})">
             <summary>
             Returns a new ConnectionSettings instance with some settings changed.
             </summary>
-            <param name="authenticators">The authenticators.</param>
+            <param name="authenticatorFactories">The authenticator factories.</param>
             <param name="compressors">The compressors.</param>
             <param name="maxIdleTime">The maximum idle time.</param>
             <param name="maxLifeTime">The maximum life time.</param>
@@ -4476,6 +4777,11 @@
             Gets the connection mode.
             </summary>
         </member>
+        <member name="P:MongoDB.Driver.Core.Configuration.ConnectionString.ConnectionModeSwitch">
+            <summary>
+            Gets the connection mode switch.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.Core.Configuration.ConnectionString.ConnectTimeout">
             <summary>
             Gets the connect timeout.
@@ -4484,6 +4790,11 @@
         <member name="P:MongoDB.Driver.Core.Configuration.ConnectionString.DatabaseName">
             <summary>
             Gets the name of the database.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Configuration.ConnectionString.DirectConnection">
+            <summary>
+            Gets the directConnection.
             </summary>
         </member>
         <member name="P:MongoDB.Driver.Core.Configuration.ConnectionString.FSync">
@@ -4619,6 +4930,11 @@
             Gets whether to use TLS.
             </summary>
         </member>
+        <member name="P:MongoDB.Driver.Core.Configuration.ConnectionString.TlsDisableCertificateRevocationCheck">
+            <summary>
+             Get whether or not certificate revocation checking is disabled during the TLS handshake.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.Core.Configuration.ConnectionString.TlsInsecure">
             <summary>
             Gets whether to relax TLS constraints as much as possible.
@@ -4666,19 +4982,21 @@
             <param name="name">The name.</param>
             <returns>The option with the specified name.</returns>
         </member>
-        <member name="M:MongoDB.Driver.Core.Configuration.ConnectionString.Resolve">
+        <member name="M:MongoDB.Driver.Core.Configuration.ConnectionString.Resolve(System.Threading.CancellationToken)">
             <summary>
             Resolves a connection string. If the connection string indicates more information is available
             in the DNS system, it will acquire that information as well.
             </summary>
+            <param name="cancellationToken">The cancellation token.</param>
             <returns>A resolved ConnectionString.</returns>
         </member>
-        <member name="M:MongoDB.Driver.Core.Configuration.ConnectionString.Resolve(System.Boolean)">
+        <member name="M:MongoDB.Driver.Core.Configuration.ConnectionString.Resolve(System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Resolves a connection string. If the connection string indicates more information is available
             in the DNS system, it will acquire that information as well.
             </summary>
             <param name="resolveHosts">Whether to resolve hosts.</param>
+            <param name="cancellationToken">The cancellation token.</param>
             <returns>A resolved ConnectionString.</returns>
         </member>
         <member name="M:MongoDB.Driver.Core.Configuration.ConnectionString.ResolveAsync(System.Threading.CancellationToken)">
@@ -4937,6 +5255,14 @@
             <summary>
             Represents a connection pool.
             </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.ConnectionPools.IConnectionPool.Generation">
+            <summary>
+            Gets the generation of the connection pool.
+            </summary>
+            <value>
+            The generation.
+            </value>
         </member>
         <member name="P:MongoDB.Driver.Core.ConnectionPools.IConnectionPool.ServerId">
             <summary>
@@ -5234,6 +5560,14 @@
             The end point.
             </value>
         </member>
+        <member name="P:MongoDB.Driver.Core.Connections.IConnection.Generation">
+            <summary>
+            Gets the generation of the pool when this connection was created.
+            </summary>
+            <value>
+            The generation of the pool when this connection was created.
+            </value>
+        </member>
         <member name="P:MongoDB.Driver.Core.Connections.IConnection.IsExpired">
             <summary>
             Gets a value indicating whether this instance is expired.
@@ -5249,6 +5583,12 @@
             <value>
             The connection settings.
             </value>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Connections.IConnection.SetReadTimeout(System.TimeSpan)">
+            <summary>
+            Set read timeout value.
+            </summary>
+            <param name="timeout">The timeout.</param>
         </member>
         <member name="M:MongoDB.Driver.Core.Connections.IConnection.Open(System.Threading.CancellationToken)">
             <summary>
@@ -5344,6 +5684,11 @@
             Gets the compressor types.
             </summary>
         </member>
+        <member name="P:MongoDB.Driver.Core.Connections.IsMasterResult.ConnectionIdServerValue">
+            <summary>
+            Gets the connection id server value.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.Core.Connections.IsMasterResult.ElectionId">
             <summary>
             Gets the election identifier.
@@ -5435,12 +5780,28 @@
             The type of the server.
             </value>
         </member>
+        <member name="P:MongoDB.Driver.Core.Connections.IsMasterResult.SpeculativeAuthenticate">
+            <summary>
+            Get the SpeculativeAuthenticate reply.
+            </summary>
+            <value>
+            Null if isMaster["ok"] != 1 or if the SpeculativeAuthenticate reply was not included in the isMaster response.
+            </value>
+        </member>
         <member name="P:MongoDB.Driver.Core.Connections.IsMasterResult.Tags">
             <summary>
             Gets the replica set tags.
             </summary>
             <value>
             The replica set tags.
+            </value>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Connections.IsMasterResult.TopologyVersion">
+            <summary>
+            Get the TopologyVersion.
+            </summary>
+            <value>
+            Null if TopologyVersion was not included in the isMaster response.
             </value>
         </member>
         <member name="P:MongoDB.Driver.Core.Connections.IsMasterResult.MaxWireVersion">
@@ -7252,12 +7613,18 @@
             Occurs when a heartbeat failed.
             </summary>
         </member>
-        <member name="M:MongoDB.Driver.Core.Events.ServerHeartbeatFailedEvent.#ctor(MongoDB.Driver.Core.Connections.ConnectionId,System.Exception)">
+        <member name="M:MongoDB.Driver.Core.Events.ServerHeartbeatFailedEvent.#ctor(MongoDB.Driver.Core.Connections.ConnectionId,System.Exception,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Events.ServerHeartbeatFailedEvent"/> struct.
             </summary>
             <param name="connectionId">The connection identifier.</param>
             <param name="exception">The exception.</param>
+            <param name="awaited">The awaited flag.</param>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Events.ServerHeartbeatFailedEvent.Awaited">
+            <summary>
+            Determines if this heartbeat event is for an awaitable isMaster.
+            </summary>
         </member>
         <member name="P:MongoDB.Driver.Core.Events.ServerHeartbeatFailedEvent.ClusterId">
             <summary>
@@ -7284,11 +7651,17 @@
             Occurs when a heartbeat succeeded.
             </summary>
         </member>
-        <member name="M:MongoDB.Driver.Core.Events.ServerHeartbeatStartedEvent.#ctor(MongoDB.Driver.Core.Connections.ConnectionId)">
+        <member name="M:MongoDB.Driver.Core.Events.ServerHeartbeatStartedEvent.#ctor(MongoDB.Driver.Core.Connections.ConnectionId,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Events.ServerHeartbeatStartedEvent"/> struct.
             </summary>
             <param name="connectionId">The connection identifier.</param>
+            <param name="awaited">The awaited flag.</param>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Events.ServerHeartbeatStartedEvent.Awaited">
+            <summary>
+            Determines if this heartbeat event is for an awaitable isMaster.
+            </summary>
         </member>
         <member name="P:MongoDB.Driver.Core.Events.ServerHeartbeatStartedEvent.ClusterId">
             <summary>
@@ -7310,12 +7683,18 @@
             Occurs before heartbeat is issued.
             </summary>
         </member>
-        <member name="M:MongoDB.Driver.Core.Events.ServerHeartbeatSucceededEvent.#ctor(MongoDB.Driver.Core.Connections.ConnectionId,System.TimeSpan)">
+        <member name="M:MongoDB.Driver.Core.Events.ServerHeartbeatSucceededEvent.#ctor(MongoDB.Driver.Core.Connections.ConnectionId,System.TimeSpan,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Events.ServerHeartbeatSucceededEvent"/> struct.
             </summary>
             <param name="connectionId">The connection identifier.</param>
             <param name="duration">The duration of time it took to complete the heartbeat.</param>
+            <param name="awaited">The awaited flag.</param>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Events.ServerHeartbeatSucceededEvent.Awaited">
+            <summary>
+            Determines if this heartbeat event is for an awaitable isMaster.
+            </summary>
         </member>
         <member name="P:MongoDB.Driver.Core.Events.ServerHeartbeatSucceededEvent.ClusterId">
             <summary>
@@ -7938,6 +8317,11 @@
             Gets the aggregate feature.
             </summary>
         </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.AggregateAccumulator">
+            <summary>
+            Gets the aggregate accumulato feature.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.Core.Misc.Feature.AggregateAddFields">
             <summary>
             Gets the aggregate AddFields feature.
@@ -7978,6 +8362,11 @@
             Gets the aggregate $facet stage feature.
             </summary>
         </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.AggregateFunction">
+            <summary>
+            Gets the aggregate $function stage feature.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.Core.Misc.Feature.AggregateGraphLookupStage">
             <summary>
             Gets the aggregate $graphLookup stage feature.
@@ -8003,9 +8392,19 @@
             Gets the aggregate out feature.
             </summary>
         </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.AggregateOutToDifferentDatabase">
+            <summary>
+            Gets the aggregate out to a different database feature.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.Core.Misc.Feature.AggregateToString">
             <summary>
             Gets the aggregate toString feature.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.AggregateUnionWith">
+            <summary>
+            Gets the aggregate unionWith feature.
             </summary>
         </member>
         <member name="P:MongoDB.Driver.Core.Misc.Feature.ArrayFilters">
@@ -8048,6 +8447,11 @@
             Gets the commands that write accept write concern feature.
             </summary>
         </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.CreateIndexCommitQuorum">
+            <summary>
+            Gets the create index commit quorum feature.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.Core.Misc.Feature.CreateIndexesCommand">
             <summary>
             Gets the create indexes command feature.
@@ -8066,6 +8470,11 @@
         <member name="P:MongoDB.Driver.Core.Misc.Feature.DocumentValidation">
             <summary>
             Gets the document validation feature.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.DirectConnectionSetting">
+            <summary>
+            Gets the directConnection setting feature.
             </summary>
         </member>
         <member name="P:MongoDB.Driver.Core.Misc.Feature.Eval">
@@ -8088,6 +8497,16 @@
             Gets the fail points fail command feature.
             </summary>
         </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.FailPointsFailCommandForSharded">
+            <summary>
+            Gets the fail points fail command for sharded feature.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.FindAllowDiskUse">
+            <summary>
+            Gets the find allowDiskUse feature.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.Core.Misc.Feature.FindAndModifyWriteConcern">
             <summary>
             Gets the find and modify write concern feature.
@@ -8108,6 +8527,31 @@
             Gets the group command feature.
             </summary>
         </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.HedgedReads">
+            <summary>
+            Gets the hedged reads feature.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.HiddenIndex">
+            <summary>
+            Gets the hidden index feature.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.HintForDeleteOperations">
+            <summary>
+            Gets the hint for delete operations feature.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.HintForFindAndModifyFeature">
+            <summary>
+            Gets the hint for find and modify operations feature.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.HintForUpdateAndReplaceOperations">
+            <summary>
+            Gets the hint for update and replace operations feature.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.Core.Misc.Feature.KeepConnectionPoolWhenNotMasterConnectionException">
             <summary>
             Gets the keep connection pool when NotMaster connection exception feature.
@@ -8126,6 +8570,11 @@
         <member name="P:MongoDB.Driver.Core.Misc.Feature.IndexOptionsDefaults">
             <summary>
             Gets the index options defaults feature.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.ListDatabasesAuthorizedDatabases">
+            <summary>
+            Get the list databases authorizedDatabases feature.
             </summary>
         </member>
         <member name="P:MongoDB.Driver.Core.Misc.Feature.ListDatabasesFilter">
@@ -8178,6 +8627,11 @@
             Gets the retryable reads feature.
             </summary>
         </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.RetryableWrites">
+            <summary>
+            Gets the retryable writes feature.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.Core.Misc.Feature.ScramSha1Authentication">
             <summary>
             Gets the scram sha1 authentication feature.
@@ -8193,9 +8647,29 @@
             Gets the server extracts username from X509 certificate feature.
             </summary>
         </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.ServerReturnsResumableChangeStreamErrorLabel">
+            <summary>
+            Gets the server returns resumableChangeStream label feature.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.ServerReturnsRetryableWriteErrorLabel">
+            <summary>
+            Gets the server returns retryable writeError label feature.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.Core.Misc.Feature.ShardedTransactions">
             <summary>
             Gets the sharded transactions feature.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.SpeculativeAuthentication">
+            <summary>
+            Gets the speculative authentication feature.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.StreamingIsMaster">
+            <summary>
+            Gets the streaming isMaster feature.
             </summary>
         </member>
         <member name="P:MongoDB.Driver.Core.Misc.Feature.TailableCursor">
@@ -8218,14 +8692,14 @@
             Gets the views feature.
             </summary>
         </member>
-        <member name="P:MongoDB.Driver.Core.Misc.Feature.WriteCommands">
-            <summary>
-            Gets the write commands feature.
-            </summary>
-        </member>
         <member name="P:MongoDB.Driver.Core.Misc.Feature.WildcardIndexes">
             <summary>
             Gets the wildcard indexes feature.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Misc.Feature.WriteCommands">
+            <summary>
+            Gets the write commands feature.
             </summary>
         </member>
         <member name="M:MongoDB.Driver.Core.Misc.Feature.#ctor(System.String,MongoDB.Driver.Core.Misc.SemanticVersion,MongoDB.Driver.Core.Misc.SemanticVersion)">
@@ -8271,6 +8745,26 @@
             </summary>
             <param name="serverVersion">The server version.</param>
         </member>
+        <member name="T:MongoDB.Driver.Core.Misc.FindAllowDiskUseFeature">
+            <summary>
+            Represents the find allowDiskUse feature.
+            </summary>
+            <seealso cref="T:MongoDB.Driver.Core.Misc.Feature" />
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.FindAllowDiskUseFeature.#ctor(System.String,MongoDB.Driver.Core.Misc.SemanticVersion)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Misc.FindAllowDiskUseFeature"/> class.
+            </summary>
+            <param name="name">The name of the feature.</param>
+            <param name="firstSupportedVersion">The first server version that supports the feature.</param>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.FindAllowDiskUseFeature.DriverMustThrowIfNotSupported(MongoDB.Driver.Core.Misc.SemanticVersion)">
+            <summary>
+            Determines whether the driver must throw an exception if the feature is not supported by the server.
+            </summary>
+            <param name="serverVersion">The server version.</param>
+            <returns>Whether the driver must throw if feature is not supported.</returns>
+        </member>
         <member name="T:MongoDB.Driver.Core.Misc.FixedCountBatchableSourceSerializer`1">
             <summary>
             A serializer for BatchableSource that serializes a fixed count of items.
@@ -8287,6 +8781,65 @@
         </member>
         <member name="M:MongoDB.Driver.Core.Misc.FixedCountBatchableSourceSerializer`1.Serialize(MongoDB.Bson.Serialization.BsonSerializationContext,MongoDB.Bson.Serialization.BsonSerializationArgs,MongoDB.Driver.Core.Misc.BatchableSource{`0})">
             <inheritdoc />
+        </member>
+        <member name="T:MongoDB.Driver.Core.Misc.HintForDeleteOperationsFeature">
+            <summary>
+            Represents the hint for delete operations feature.
+            </summary>
+            <seealso cref="T:MongoDB.Driver.Core.Misc.Feature" />
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.HintForDeleteOperationsFeature.#ctor(System.String,MongoDB.Driver.Core.Misc.SemanticVersion)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Misc.HintForDeleteOperationsFeature"/> class.
+            </summary>
+            <param name="name">The name of the feature.</param>
+            <param name="firstSupportedVersion">The first server version that supports the feature.</param>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.HintForDeleteOperationsFeature.DriverMustThrowIfNotSupported(MongoDB.Driver.Core.Misc.SemanticVersion)">
+            <summary>
+            Determines whether the driver must throw an exception if the feature is not supported by the server.
+            </summary>
+            <param name="serverVersion">The server version.</param>
+            <returns>Whether the driver must throw if feature is not supported.</returns>
+        </member>
+        <member name="T:MongoDB.Driver.Core.Misc.HintForFindAndModifyFeature">
+            <summary>
+            Represents the hint for find and modify feature.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.HintForFindAndModifyFeature.#ctor(System.String,MongoDB.Driver.Core.Misc.SemanticVersion)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Misc.HintForFindAndModifyFeature"/> class.
+            </summary>
+            <param name="name">The name of the feature.</param>
+            <param name="firstSupportedVersion">The first server version that supports the feature.</param>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.HintForFindAndModifyFeature.DriverMustThrowIfNotSupported(MongoDB.Driver.Core.Misc.SemanticVersion)">
+            <summary>
+            Determines whether the driver must throw an exception if the feature is not supported by the server.
+            </summary>
+            <param name="serverVersion">The server version.</param>
+            <returns>Whether the driver must throw if feature is not supported.</returns>
+        </member>
+        <member name="T:MongoDB.Driver.Core.Misc.HintForUpdateAndReplaceOperationsFeature">
+            <summary>
+            Represents the hint for update and replace operations feature.
+            </summary>
+            <seealso cref="T:MongoDB.Driver.Core.Misc.Feature" />
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.HintForUpdateAndReplaceOperationsFeature.#ctor(System.String,MongoDB.Driver.Core.Misc.SemanticVersion)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Misc.HintForUpdateAndReplaceOperationsFeature"/> class.
+            </summary>
+            <param name="name">The name of the feature.</param>
+            <param name="firstSupportedVersion">The first server version that supports the feature.</param>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.HintForUpdateAndReplaceOperationsFeature.DriverMustThrowIfNotSupported(MongoDB.Driver.Core.Misc.SemanticVersion)">
+            <summary>
+            Determines whether the driver must throw an exception if the feature is not supported by the server.
+            </summary>
+            <param name="serverVersion">The server version.</param>
+            <returns>Whether the driver must throw if feature is not supported.</returns>
         </member>
         <member name="T:MongoDB.Driver.Core.Misc.IBatchableSource`1">
             <summary>
@@ -8616,6 +9169,144 @@
         </member>
         <member name="M:MongoDB.Driver.Core.Misc.SemaphoreSlimRequest.Dispose">
             <inheritdoc/>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.ServerVersion.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Misc.ServerVersion"/> class.
+            </summary>
+            <param name="major">The major version.</param>
+            <param name="minor">The minor version.</param>
+            <param name="patch">The patch version.</param>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.ServerVersion.#ctor(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Misc.ServerVersion"/> class.
+            </summary>
+            <param name="major">The major version.</param>
+            <param name="minor">The minor version.</param>
+            <param name="patch">The patch version.</param>
+            <param name="preRelease">The pre release version.</param>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Misc.ServerVersion.CommitHash">
+            <summary>
+            Gets the internal build commit hash.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Misc.ServerVersion.CommitsAfterRelease">
+            <summary>
+            Gets the number of commits after release.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Misc.ServerVersion.Major">
+            <summary>
+            Gets the major version.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Misc.ServerVersion.Minor">
+            <summary>
+            Gets the minor version.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Misc.ServerVersion.Patch">
+            <summary>
+            Gets the patch version.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Misc.ServerVersion.PreRelease">
+            <summary>
+            Gets the pre release version.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.ServerVersion.CompareTo(MongoDB.Driver.Core.Misc.ServerVersion)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.ServerVersion.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.ServerVersion.Equals(MongoDB.Driver.Core.Misc.ServerVersion)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.ServerVersion.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.ServerVersion.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.ServerVersion.Parse(System.String)">
+            <summary>
+            Parses a string representation of a server version.
+            </summary>
+            <param name="value">The string value to parse.</param>
+            <returns>A server version.</returns>
+            <exception cref="T:System.FormatException">value</exception>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.ServerVersion.TryParse(System.String,MongoDB.Driver.Core.Misc.ServerVersion@)">
+            <summary>
+            Tries to parse a string representation of a server version.
+            </summary>
+            <param name="value">The string value to parse.</param>
+            <param name="result">The result.</param>
+            <returns>True if the string representation was parsed successfully; otherwise false.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.ServerVersion.op_Equality(MongoDB.Driver.Core.Misc.ServerVersion,MongoDB.Driver.Core.Misc.ServerVersion)">
+            <summary>
+            Determines whether two specified server versions have the same value.
+            </summary>
+            <param name="a">The first server version to compare, or null.</param>
+            <param name="b">The second server version to compare, or null.</param>
+            <returns>
+            True if the value of a is the same as the value of b; otherwise false.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.ServerVersion.op_Inequality(MongoDB.Driver.Core.Misc.ServerVersion,MongoDB.Driver.Core.Misc.ServerVersion)">
+            <summary>
+            Determines whether two specified server versions have different values.
+            </summary>
+            <param name="a">The first server version to compare, or null.</param>
+            <param name="b">The second server version to compare, or null.</param>
+            <returns>
+            True if the value of a is different from the value of b; otherwise false.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.ServerVersion.op_GreaterThan(MongoDB.Driver.Core.Misc.ServerVersion,MongoDB.Driver.Core.Misc.ServerVersion)">
+            <summary>
+            Determines whether the first specified ServerVersion is greater than the second specified ServerVersion.
+            </summary>
+            <param name="a">The first server version to compare, or null.</param>
+            <param name="b">The second server version to compare, or null.</param>
+            <returns>
+            True if the value of a is greater than b; otherwise false.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.ServerVersion.op_GreaterThanOrEqual(MongoDB.Driver.Core.Misc.ServerVersion,MongoDB.Driver.Core.Misc.ServerVersion)">
+            <summary>
+            Determines whether the first specified ServerVersion is greater than or equal to the second specified ServerVersion.
+            </summary>
+            <param name="a">The first server version to compare, or null.</param>
+            <param name="b">The second server version to compare, or null.</param>
+            <returns>
+            True if the value of a is greater than or equal to b; otherwise false.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.ServerVersion.op_LessThan(MongoDB.Driver.Core.Misc.ServerVersion,MongoDB.Driver.Core.Misc.ServerVersion)">
+            <summary>
+            Determines whether the first specified ServerVersion is less than the second specified ServerVersion.
+            </summary>
+            <param name="a">The first server version to compare, or null.</param>
+            <param name="b">The second server version to compare, or null.</param>
+            <returns>
+            True if the value of a is less than b; otherwise false.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Misc.ServerVersion.op_LessThanOrEqual(MongoDB.Driver.Core.Misc.ServerVersion,MongoDB.Driver.Core.Misc.ServerVersion)">
+            <summary>
+            Determines whether the first specified ServerVersion is less than or equal to the second specified ServerVersion.
+            </summary>
+            <param name="a">The first server version to compare, or null.</param>
+            <param name="b">The second server version to compare, or null.</param>
+            <returns>
+            True if the value of a is less than or equal to b; otherwise false.
+            </returns>
         </member>
         <member name="T:MongoDB.Driver.Core.Misc.SizeLimitingBatchableSourceSerializer`1">
             <summary>
@@ -9226,6 +9917,16 @@
             <param name="message">The message.</param>
             <param name="details">The details.</param>
         </member>
+        <member name="M:MongoDB.Driver.Core.Operations.BulkWriteConcernError.#ctor(System.Int32,System.String,System.String,MongoDB.Bson.BsonDocument,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Operations.BulkWriteConcernError" /> class.
+            </summary>
+            <param name="code">The code.</param>
+            <param name="codeName">The name of the code.</param>
+            <param name="message">The message.</param>
+            <param name="details">The details.</param>
+            <param name="errorLabels">The error labels.</param>
+        </member>
         <member name="P:MongoDB.Driver.Core.Operations.BulkWriteConcernError.Code">
             <summary>
             Gets the error code.
@@ -9248,6 +9949,14 @@
             </summary>
             <value>
             The error details.
+            </value>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Operations.BulkWriteConcernError.ErrorLabels">
+            <summary>
+            Gets the error labels.
+            </summary>
+            <value>
+            The error labels.
             </value>
         </member>
         <member name="P:MongoDB.Driver.Core.Operations.BulkWriteConcernError.Message">
@@ -9501,7 +10210,7 @@
         <member name="P:MongoDB.Driver.Core.Operations.ChangeStreamCursor`1.Current">
             <inheritdoc />
         </member>
-        <member name="M:MongoDB.Driver.Core.Operations.ChangeStreamCursor`1.#ctor(MongoDB.Driver.IAsyncCursor{MongoDB.Bson.RawBsonDocument},MongoDB.Bson.Serialization.IBsonSerializer{`0},MongoDB.Driver.Core.Bindings.IReadBinding,MongoDB.Driver.Core.Operations.IChangeStreamOperation{`0},MongoDB.Bson.BsonDocument,MongoDB.Bson.BsonTimestamp,MongoDB.Bson.BsonDocument,MongoDB.Bson.BsonDocument,MongoDB.Bson.BsonTimestamp)">
+        <member name="M:MongoDB.Driver.Core.Operations.ChangeStreamCursor`1.#ctor(MongoDB.Driver.IAsyncCursor{MongoDB.Bson.RawBsonDocument},MongoDB.Bson.Serialization.IBsonSerializer{`0},MongoDB.Driver.Core.Bindings.IReadBinding,MongoDB.Driver.Core.Operations.IChangeStreamOperation{`0},MongoDB.Bson.BsonDocument,MongoDB.Bson.BsonTimestamp,MongoDB.Bson.BsonDocument,MongoDB.Bson.BsonDocument,MongoDB.Bson.BsonTimestamp,MongoDB.Driver.Core.Misc.SemanticVersion)">
             <summary>
             Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Operations.ChangeStreamCursor`1" /> class.
             </summary>
@@ -9514,6 +10223,7 @@
             <param name="initialStartAfter">The start after value.</param>
             <param name="initialResumeAfter">The resume after value.</param>
             <param name="initialStartAtOperationTime">The start at operation time value.</param>
+            <param name="serverVersion">The server version.</param>
         </member>
         <member name="M:MongoDB.Driver.Core.Operations.ChangeStreamCursor`1.Dispose">
             <inheritdoc />
@@ -10180,6 +10890,11 @@
             The collection namespace.
             </value>
         </member>
+        <member name="P:MongoDB.Driver.Core.Operations.CreateIndexesOperation.CommitQuorum">
+            <summary>
+            Gets or sets the commit quorum.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.Core.Operations.CreateIndexesOperation.MessageEncoderSettings">
             <summary>
             Gets the message encoder settings.
@@ -10239,6 +10954,11 @@
             The collection namespace.
             </value>
         </member>
+        <member name="P:MongoDB.Driver.Core.Operations.CreateIndexesUsingCommandOperation.CommitQuorum">
+            <summary>
+            Gets or sets the commit quorum.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.Core.Operations.CreateIndexesUsingCommandOperation.MessageEncoderSettings">
             <summary>
             Gets the message encoder settings.
@@ -10275,49 +10995,6 @@
             <inheritdoc/>
         </member>
         <member name="M:MongoDB.Driver.Core.Operations.CreateIndexesUsingCommandOperation.ExecuteAsync(MongoDB.Driver.Core.Bindings.IWriteBinding,System.Threading.CancellationToken)">
-            <inheritdoc/>
-        </member>
-        <member name="T:MongoDB.Driver.Core.Operations.CreateIndexesUsingInsertOperation">
-            <summary>
-            Represents a create indexes operation that inserts into the system.indexes collection (used with older server versions).
-            </summary>
-        </member>
-        <member name="M:MongoDB.Driver.Core.Operations.CreateIndexesUsingInsertOperation.#ctor(MongoDB.Driver.CollectionNamespace,System.Collections.Generic.IEnumerable{MongoDB.Driver.Core.Operations.CreateIndexRequest},MongoDB.Driver.Core.WireProtocol.Messages.Encoders.MessageEncoderSettings)">
-            <summary>
-            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Operations.CreateIndexesUsingInsertOperation"/> class.
-            </summary>
-            <param name="collectionNamespace">The collection namespace.</param>
-            <param name="requests">The requests.</param>
-            <param name="messageEncoderSettings">The message encoder settings.</param>
-        </member>
-        <member name="P:MongoDB.Driver.Core.Operations.CreateIndexesUsingInsertOperation.CollectionNamespace">
-            <summary>
-            Gets the collection namespace.
-            </summary>
-            <value>
-            The collection namespace.
-            </value>
-        </member>
-        <member name="P:MongoDB.Driver.Core.Operations.CreateIndexesUsingInsertOperation.MessageEncoderSettings">
-            <summary>
-            Gets the message encoder settings.
-            </summary>
-            <value>
-            The message encoder settings.
-            </value>
-        </member>
-        <member name="P:MongoDB.Driver.Core.Operations.CreateIndexesUsingInsertOperation.Requests">
-            <summary>
-            Gets the create index requests.
-            </summary>
-            <value>
-            The create index requests.
-            </value>
-        </member>
-        <member name="M:MongoDB.Driver.Core.Operations.CreateIndexesUsingInsertOperation.Execute(MongoDB.Driver.Core.Bindings.IWriteBinding,System.Threading.CancellationToken)">
-            <inheritdoc/>
-        </member>
-        <member name="M:MongoDB.Driver.Core.Operations.CreateIndexesUsingInsertOperation.ExecuteAsync(MongoDB.Driver.Core.Bindings.IWriteBinding,System.Threading.CancellationToken)">
             <inheritdoc/>
         </member>
         <member name="T:MongoDB.Driver.Core.Operations.CreateIndexRequest">
@@ -10383,6 +11060,11 @@
             <value>
             When documents in a TTL collection expire.
             </value>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Operations.CreateIndexRequest.Hidden">
+            <summary>
+            Gets or sets a value indicating whether the index is hidden.
+            </summary>
         </member>
         <member name="P:MongoDB.Driver.Core.Operations.CreateIndexRequest.LanguageOverride">
             <summary>
@@ -10738,6 +11420,11 @@
         <member name="P:MongoDB.Driver.Core.Operations.DeleteRequest.Filter">
             <summary>
             Gets or sets the filter.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Operations.DeleteRequest.Hint">
+            <summary>
+            Gets or sets the hint.
             </summary>
         </member>
         <member name="P:MongoDB.Driver.Core.Operations.DeleteRequest.Limit">
@@ -11430,6 +12117,14 @@
             <param name="resultSerializer">The result serializer.</param>
             <param name="messageEncoderSettings">The message encoder settings.</param>
         </member>
+        <member name="P:MongoDB.Driver.Core.Operations.FindCommandOperation`1.AllowDiskUse">
+            <summary>
+            Gets or sets a value indicating whether the server is allowed to write to disk while executing the Find operation.
+            </summary>
+            <value>
+              <c>true</c> if the server is allowed to write to disk while executing the Find operation; otherwise, <c>false</c>.
+            </value>
+        </member>
         <member name="P:MongoDB.Driver.Core.Operations.FindCommandOperation`1.AllowPartialResults">
             <summary>
             Gets or sets a value indicating whether the server is allowed to return partial results if any shards are unavailable.
@@ -11687,6 +12382,14 @@
             The filter.
             </value>
         </member>
+        <member name="P:MongoDB.Driver.Core.Operations.FindOneAndDeleteOperation`1.Hint">
+            <summary>
+            Gets or sets the hint.
+            </summary>
+            <value>
+            The hint.
+            </value>
+        </member>
         <member name="P:MongoDB.Driver.Core.Operations.FindOneAndDeleteOperation`1.MaxTime">
             <summary>
             Gets or sets the maximum time the server should spend on this operation.
@@ -11744,6 +12447,14 @@
             </summary>
             <value>
             The filter.
+            </value>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Operations.FindOneAndReplaceOperation`1.Hint">
+            <summary>
+            Gets or sets the hint.
+            </summary>
+            <value>
+            The hint.
             </value>
         </member>
         <member name="P:MongoDB.Driver.Core.Operations.FindOneAndReplaceOperation`1.IsUpsert">
@@ -11835,6 +12546,14 @@
             </summary>
             <value>
             The filter.
+            </value>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Operations.FindOneAndUpdateOperation`1.Hint">
+            <summary>
+            Gets or sets the hint.
+            </summary>
+            <value>
+            The hint.
             </value>
         </member>
         <member name="P:MongoDB.Driver.Core.Operations.FindOneAndUpdateOperation`1.IsUpsert">
@@ -12118,6 +12837,14 @@
             <param name="collectionNamespace">The collection namespace.</param>
             <param name="resultSerializer">The result serializer.</param>
             <param name="messageEncoderSettings">The message encoder settings.</param>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Operations.FindOperation`1.AllowDiskUse">
+            <summary>
+            Gets or sets a value indicating whether the server is allowed to write to disk while executing the Find operation.
+            </summary>
+            <value>
+              <c>true</c> if the server is allowed to write to disk while executing the Find operation; otherwise, <c>false</c>.
+            </value>
         </member>
         <member name="P:MongoDB.Driver.Core.Operations.FindOperation`1.AllowPartialResults">
             <summary>
@@ -13159,6 +13886,14 @@
             Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Operations.ListDatabasesOperation"/> class.
             </summary>
             <param name="messageEncoderSettings">The message encoder settings.</param>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Operations.ListDatabasesOperation.AuthorizedDatabases">
+            <summary>
+            Gets or sets the AuthorizedDatabases flag.
+            </summary>
+            <value>
+            The AuthorizedDatabases flag.
+            </value>
         </member>
         <member name="P:MongoDB.Driver.Core.Operations.ListDatabasesOperation.Filter">
             <summary>
@@ -14545,6 +15280,11 @@
             Gets the filter.
             </summary>
         </member>
+        <member name="P:MongoDB.Driver.Core.Operations.UpdateRequest.Hint">
+            <summary>
+            Gets or sets the hint.
+            </summary>
+        </member>
         <member name="P:MongoDB.Driver.Core.Operations.UpdateRequest.IsMulti">
             <summary>
             Gets or sets a value indicating whether this update should affect all matching documents.
@@ -14750,10 +15490,18 @@
             Initializes this instance.
             </summary>
         </member>
-        <member name="M:MongoDB.Driver.Core.Servers.IClusterableServer.Invalidate">
+        <member name="M:MongoDB.Driver.Core.Servers.IClusterableServer.Invalidate(System.String)">
             <summary>
             Invalidates this instance (sets the server type to Unknown and clears the connection pool).
             </summary>
+            <param name="reasonInvalidated">The reason the instance was invalidated.</param>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Servers.IClusterableServer.Invalidate(System.String,MongoDB.Driver.Core.Servers.TopologyVersion)">
+            <summary>
+            Invalidates this instance (sets the server type to Unknown and clears the connection pool).
+            </summary>
+            <param name="reasonInvalidated">The reason the instance was invalidated.</param>
+            <param name="responseTopologyVersion">The topology of the version of the response that invalidated this instance.</param>
         </member>
         <member name="M:MongoDB.Driver.Core.Servers.IClusterableServer.RequestHeartbeat">
             <summary>
@@ -14766,6 +15514,21 @@
             </summary>
             <seealso cref="T:System.IDisposable" />
         </member>
+        <member name="P:MongoDB.Driver.Core.Servers.IServerMonitor.Description">
+            <summary>
+            The monitor's view of the server, which could be considered stale relative to the <see cref="T:MongoDB.Driver.Core.Servers.Server"/>'s view.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Servers.IServerMonitor.Lock">
+            <summary>
+            Lock reference to prevent race condition between the monitor and higher levels.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Servers.IServerMonitor.CancelCurrentCheck">
+            <summary>
+            Cancel the current heartbeat.
+            </summary>
+        </member>
         <member name="E:MongoDB.Driver.Core.Servers.IServerMonitor.DescriptionChanged">
             <summary>
             Occurs when the server description changes.
@@ -14774,11 +15537,6 @@
         <member name="M:MongoDB.Driver.Core.Servers.IServerMonitor.Initialize">
             <summary>
             Initializes this instance.
-            </summary>
-        </member>
-        <member name="M:MongoDB.Driver.Core.Servers.IServerMonitor.Invalidate">
-            <summary>
-            Instructs the monitor to refresh its description immediately.
             </summary>
         </member>
         <member name="M:MongoDB.Driver.Core.Servers.IServerMonitor.RequestHeartbeat">
@@ -14809,17 +15567,19 @@
             Represents information about a server.
             </summary>
         </member>
-        <member name="M:MongoDB.Driver.Core.Servers.ServerDescription.#ctor(MongoDB.Driver.Core.Servers.ServerId,System.Net.EndPoint,MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.Net.EndPoint},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ElectionId},MongoDB.Driver.Optional{System.Exception},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.DateTime},MongoDB.Driver.Optional{System.Nullable{System.DateTime}},MongoDB.Driver.Optional{System.Nullable{System.TimeSpan}},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ReplicaSetConfig},MongoDB.Driver.Optional{MongoDB.Driver.Core.Servers.ServerState},MongoDB.Driver.Optional{MongoDB.Driver.TagSet},MongoDB.Driver.Optional{MongoDB.Driver.Core.Servers.ServerType},MongoDB.Driver.Optional{MongoDB.Driver.Core.Misc.SemanticVersion},MongoDB.Driver.Optional{MongoDB.Driver.Core.Misc.Range{System.Int32}})">
+        <member name="M:MongoDB.Driver.Core.Servers.ServerDescription.#ctor(MongoDB.Driver.Core.Servers.ServerId,System.Net.EndPoint,MongoDB.Driver.Optional{System.String},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.Net.EndPoint},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ElectionId},MongoDB.Driver.Optional{System.Exception},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.Nullable{System.DateTime}},MongoDB.Driver.Optional{System.DateTime},MongoDB.Driver.Optional{System.Nullable{System.DateTime}},MongoDB.Driver.Optional{System.Nullable{System.TimeSpan}},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ReplicaSetConfig},MongoDB.Driver.Optional{MongoDB.Driver.Core.Servers.ServerState},MongoDB.Driver.Optional{MongoDB.Driver.TagSet},MongoDB.Driver.Optional{MongoDB.Driver.Core.Servers.TopologyVersion},MongoDB.Driver.Optional{MongoDB.Driver.Core.Servers.ServerType},MongoDB.Driver.Optional{MongoDB.Driver.Core.Misc.SemanticVersion},MongoDB.Driver.Optional{MongoDB.Driver.Core.Misc.Range{System.Int32}})">
             <summary>
             Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Servers.ServerDescription" /> class.
             </summary>
             <param name="serverId">The server identifier.</param>
             <param name="endPoint">The end point.</param>
+            <param name="reasonChanged">The reason the server description was last changed.</param>
             <param name="averageRoundTripTime">The average round trip time.</param>
             <param name="canonicalEndPoint">The canonical end point.</param>
             <param name="electionId">The election identifier.</param>
             <param name="heartbeatException">The heartbeat exception.</param>
             <param name="heartbeatInterval">The heartbeat interval.</param>
+            <param name="lastHeartbeatTimestamp">The last heartbeat timestamp.</param>
             <param name="lastUpdateTimestamp">The last update timestamp.</param>
             <param name="lastWriteTimestamp">The last write timestamp.</param>
             <param name="logicalSessionTimeout">The logical session timeout.</param>
@@ -14830,6 +15590,7 @@
             <param name="replicaSetConfig">The replica set configuration.</param>
             <param name="state">The server state.</param>
             <param name="tags">The replica set tags.</param>
+            <param name="topologyVersion">The topology version.</param>
             <param name="type">The server type.</param>
             <param name="version">The server version.</param>
             <param name="wireVersionRange">The wire version range.</param>
@@ -14845,7 +15606,7 @@
         </member>
         <member name="P:MongoDB.Driver.Core.Servers.ServerDescription.CanonicalEndPoint">
             <summary>
-            Gets the canonical end point. This is the endpoint that the cluster knows this 
+            Gets the canonical end point. This is the endpoint that the cluster knows this
             server by. Currently, it only applies to a replica set config and will match
             what is in the replica set configuration.
             </summary>
@@ -14893,6 +15654,14 @@
             </summary>
             <value>
               <c>true</c> if this instance is a data bearing server; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Servers.ServerDescription.LastHeartbeatTimestamp">
+            <summary>
+            Gets the last heartbeat timestamp.
+            </summary>
+            <value>
+            The last heartbeat timestamp.
             </value>
         </member>
         <member name="P:MongoDB.Driver.Core.Servers.ServerDescription.LastUpdateTimestamp">
@@ -14951,6 +15720,12 @@
             The maximum size of a wire document.
             </value>
         </member>
+        <member name="P:MongoDB.Driver.Core.Servers.ServerDescription.ReasonChanged">
+            <summary>
+            The reason the server description was last changed.
+            </summary>
+            <value>The reason the server description was last changed.</value>
+        </member>
         <member name="P:MongoDB.Driver.Core.Servers.ServerDescription.ReplicaSetConfig">
             <summary>
             Gets the replica set configuration.
@@ -14991,6 +15766,14 @@
             The server type.
             </value>
         </member>
+        <member name="P:MongoDB.Driver.Core.Servers.ServerDescription.TopologyVersion">
+            <summary>
+            Gets the topology version.
+            </summary>
+            <value>
+            The server topology version.
+            </value>
+        </member>
         <member name="P:MongoDB.Driver.Core.Servers.ServerDescription.Version">
             <summary>
             Gets the server version.
@@ -15016,18 +15799,27 @@
         <member name="M:MongoDB.Driver.Core.Servers.ServerDescription.GetHashCode">
             <inheritdoc/>
         </member>
+        <member name="M:MongoDB.Driver.Core.Servers.ServerDescription.SdamEquals(MongoDB.Driver.Core.Servers.ServerDescription)">
+            <summary>
+            Determines whether the specified <see cref="T:MongoDB.Driver.Core.Servers.ServerDescription" /> can be considered as equal to decide should we publish sdam events or not.
+            </summary>
+            <param name="other">The other server description.</param>
+            <returns><c>true</c>, if sdam events should be suppressed, otherwise <c>false</c>.</returns>
+        </member>
         <member name="M:MongoDB.Driver.Core.Servers.ServerDescription.ToString">
             <inheritdoc/>
         </member>
-        <member name="M:MongoDB.Driver.Core.Servers.ServerDescription.With(MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.Net.EndPoint},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ElectionId},MongoDB.Driver.Optional{System.Exception},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.DateTime},MongoDB.Driver.Optional{System.Nullable{System.DateTime}},MongoDB.Driver.Optional{System.Nullable{System.TimeSpan}},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ReplicaSetConfig},MongoDB.Driver.Optional{MongoDB.Driver.Core.Servers.ServerState},MongoDB.Driver.Optional{MongoDB.Driver.TagSet},MongoDB.Driver.Optional{MongoDB.Driver.Core.Servers.ServerType},MongoDB.Driver.Optional{MongoDB.Driver.Core.Misc.SemanticVersion},MongoDB.Driver.Optional{MongoDB.Driver.Core.Misc.Range{System.Int32}})">
+        <member name="M:MongoDB.Driver.Core.Servers.ServerDescription.With(MongoDB.Driver.Optional{System.String},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.Net.EndPoint},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ElectionId},MongoDB.Driver.Optional{System.Exception},MongoDB.Driver.Optional{System.TimeSpan},MongoDB.Driver.Optional{System.Nullable{System.DateTime}},MongoDB.Driver.Optional{System.DateTime},MongoDB.Driver.Optional{System.Nullable{System.DateTime}},MongoDB.Driver.Optional{System.Nullable{System.TimeSpan}},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{System.Int32},MongoDB.Driver.Optional{MongoDB.Driver.Core.Clusters.ReplicaSetConfig},MongoDB.Driver.Optional{MongoDB.Driver.Core.Servers.ServerState},MongoDB.Driver.Optional{MongoDB.Driver.TagSet},MongoDB.Driver.Optional{MongoDB.Driver.Core.Servers.TopologyVersion},MongoDB.Driver.Optional{MongoDB.Driver.Core.Servers.ServerType},MongoDB.Driver.Optional{MongoDB.Driver.Core.Misc.SemanticVersion},MongoDB.Driver.Optional{MongoDB.Driver.Core.Misc.Range{System.Int32}})">
             <summary>
             Returns a new instance of ServerDescription with some values changed.
             </summary>
+            <param name="reasonChanged">The reason the server description changed.</param>
             <param name="averageRoundTripTime">The average round trip time.</param>
             <param name="canonicalEndPoint">The canonical end point.</param>
             <param name="electionId">The election identifier.</param>
             <param name="heartbeatException">The heartbeat exception.</param>
             <param name="heartbeatInterval">The heartbeat interval.</param>
+            <param name="lastHeartbeatTimestamp">The last heartbeat timestamp.</param>
             <param name="lastUpdateTimestamp">The last update timestamp.</param>
             <param name="lastWriteTimestamp">The last write timestamp.</param>
             <param name="logicalSessionTimeout">The logical session timeout.</param>
@@ -15038,6 +15830,7 @@
             <param name="replicaSetConfig">The replica set configuration.</param>
             <param name="state">The server state.</param>
             <param name="tags">The replica set tags.</param>
+            <param name="topologyVersion">The topology version.</param>
             <param name="type">The server type.</param>
             <param name="version">The server version.</param>
             <param name="wireVersionRange">The wire version range.</param>
@@ -15219,6 +16012,137 @@
             <param name="serverType">The type of the server.</param>
             <returns>The cluster type.</returns>
         </member>
+        <member name="T:MongoDB.Driver.Core.Servers.TopologyVersion">
+            <summary>
+            Represents a topology description.
+            </summary>
+            <remarks>
+            Comparing topology descriptions freshness does not exhibit the reversal property of
+            inequalities e.g. IsStalerThan(a, b) (a "&lt;" b) does not imply !IsStalerThan(b, a) (b "&gt;" a)
+            See <seealso cref="M:MongoDB.Driver.Core.Servers.TopologyVersion.CompareTopologyVersion(MongoDB.Driver.Core.Servers.TopologyVersion,MongoDB.Driver.Core.Servers.TopologyVersion)"/> for more information.
+            </remarks>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Servers.TopologyVersion.CompareTopologyVersion(MongoDB.Driver.Core.Servers.TopologyVersion,MongoDB.Driver.Core.Servers.TopologyVersion)">
+            <summary>
+            Compares a local TopologyVersion with a server's TopologyVersion and indicates whether the local
+            TopologyVersion is staler, fresher, or equal to the server's TopologyVersion.
+            Per the SDAM specification, if the ProcessIds are not equal, this method assumes that
+            <paramref name="y"/> is more recent. This means that this method does not exhibit
+            the reversal properties of inequalities i.e. a "&lt;" b does not imply b "&gt;" a.
+            </summary>
+            <param name="x">The first TopologyVersion.</param>
+            <param name="y">The other TopologyVersion.</param>
+            <returns>
+            Less than zero indicates that the <paramref name="x"/> is staler than the <paramref name="y"/>.
+            Zero indicates that the <paramref name="x"/> description is equal to the <paramref name="y"/>.
+            Greater than zero indicates that the <paramref name="x"/> is fresher than the <paramref name="y"/>.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Servers.TopologyVersion.FromBsonDocument(MongoDB.Bson.BsonDocument)">
+            <summary>
+            Attempts to create a TopologyVersion from the supplied BsonDocument.
+            </summary>
+            <param name="document">The document. Should contain an ObjectId named "processId" and a BsonInt64 named "counter".</param>
+            <returns>A TopologyVersion if one could be constructed from the supplied document and null otherwise.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Servers.TopologyVersion.IsFresherThan(MongoDB.Driver.Core.Servers.TopologyVersion,MongoDB.Driver.Core.Servers.TopologyVersion)">
+            <summary>
+            Gets whether or not <paramref name="x"/> is fresher than <paramref name="y"/>.
+            Comparing topology descriptions freshness does not exhibit the reversal property of
+            inequalities e.g. a.IsFresherThan(b) (a "&lt;" b) does not imply
+            !b.IsFresherThan(a) (b "&gt;" a)
+            See <seealso cref="M:MongoDB.Driver.Core.Servers.TopologyVersion.CompareTopologyVersion(MongoDB.Driver.Core.Servers.TopologyVersion,MongoDB.Driver.Core.Servers.TopologyVersion)"/> for more information.
+            In the case that this.Equals(<paramref name="y"/>), <paramref name="y"/> will be considered to be fresher.
+            </summary>
+            <param name="x">The first TopologyVersion.</param>
+            <param name="y">The other TopologyVersion.</param>
+            <returns>
+            Whether or not this TopologyVersion is fresher than <paramref name="y"/>.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Servers.TopologyVersion.IsFresherThanOrEqualTo(MongoDB.Driver.Core.Servers.TopologyVersion,MongoDB.Driver.Core.Servers.TopologyVersion)">
+            <summary>
+            Gets whether or not <paramref name="x"/> is fresher than or Equal to <paramref name="y"/>.
+            Comparing topology descriptions freshness does not exhibit the reversal property of
+            inequalities e.g. a.IsFresherThan(b) (a "&lt;" b) does not imply
+            !b.IsFresherThan(a) (b "&gt;" a)
+            See <seealso cref="M:MongoDB.Driver.Core.Servers.TopologyVersion.CompareTopologyVersion(MongoDB.Driver.Core.Servers.TopologyVersion,MongoDB.Driver.Core.Servers.TopologyVersion)"/> for more information.
+            In the case that this.Equals(<paramref name="y"/>), <paramref name="y"/> will be considered to be fresher.
+            </summary>
+            <param name="x">The first TopologyVersion.</param>
+            <param name="y">The other TopologyVersion.</param>
+            <returns>
+            Whether or not this TopologyVersion is fresher than <paramref name="y"/>.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Servers.TopologyVersion.IsStalerThan(MongoDB.Driver.Core.Servers.TopologyVersion,MongoDB.Driver.Core.Servers.TopologyVersion)">
+            <summary>
+            Gets whether or not <paramref name="x"/> is staler than or Equal to <paramref name="y"/>.
+            Comparing topology descriptions freshness does not exhibit the reversal property of
+            inequalities e.g. a.IsStalerThan(b) (a "&lt;" b) does not imply
+            !b.IsStalerThan(a) (b "&gt;" a).
+            See <seealso cref="M:MongoDB.Driver.Core.Servers.TopologyVersion.CompareTopologyVersion(MongoDB.Driver.Core.Servers.TopologyVersion,MongoDB.Driver.Core.Servers.TopologyVersion)"/> for more information.
+            In the case that this == <paramref name="y"/>, <paramref name="y"/> will be considered to be fresher.
+            </summary>
+            <param name="x">The first TopologyVersion.</param>
+            <param name="y">The other TopologyVersion.</param>
+            <returns>
+            Whether or not this TopologyVersion is staler than <paramref name="y"/>.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Servers.TopologyVersion.IsStalerThanOrEqualTo(MongoDB.Driver.Core.Servers.TopologyVersion,MongoDB.Driver.Core.Servers.TopologyVersion)">
+            <summary>
+            Gets whether or not <paramref name="x"/> is staler than or Equal to <paramref name="y"/>.
+            Comparing topology descriptions freshness does not exhibit the reversal property of
+            inequalities e.g. a.IsStalerThan(b) (a "&lt;" b) does not imply
+            !b.IsStalerThan(a) (b "&gt;" a).
+            See <seealso cref="M:MongoDB.Driver.Core.Servers.TopologyVersion.CompareTopologyVersion(MongoDB.Driver.Core.Servers.TopologyVersion,MongoDB.Driver.Core.Servers.TopologyVersion)"/> for more information.
+            In the case that this == <paramref name="y"/>, <paramref name="y"/> will be considered to be fresher.
+            </summary>
+            <param name="x">The first TopologyVersion.</param>
+            <param name="y">The other TopologyVersion.</param>
+            <returns>
+            Whether or not this TopologyVersion is staler than <paramref name="y"/>.
+            </returns>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Servers.TopologyVersion.#ctor(MongoDB.Bson.ObjectId,System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.Servers.TopologyVersion"/> class.
+            </summary>
+            <param name="processId">The process identifier.</param>
+            <param name="counter">The counter.</param>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Servers.TopologyVersion.Counter">
+            <summary>
+            Gets the process identifier.
+            </summary>
+            <value>
+            The process identifier.
+            </value>
+        </member>
+        <member name="P:MongoDB.Driver.Core.Servers.TopologyVersion.ProcessId">
+            <summary>
+            Gets the process identifier.
+            </summary>
+            <value>
+            The process identifier.
+            </value>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Servers.TopologyVersion.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:MongoDB.Driver.Core.Servers.TopologyVersion.Equals(MongoDB.Driver.Core.Servers.TopologyVersion)">
+            <inheritdoc />
+        </member>
+        <member name="M:MongoDB.Driver.Core.Servers.TopologyVersion.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Servers.TopologyVersion.ToBsonDocument">
+            <inheritdoc/>
+        </member>
+        <member name="M:MongoDB.Driver.Core.Servers.TopologyVersion.ToString">
+            <inheritdoc/>
+        </member>
         <member name="T:MongoDB.Driver.Core.WireProtocol.CommandResponseHandling">
             <summary>
             Instructions for handling the response from a command.
@@ -15237,6 +16161,11 @@
         <member name="F:MongoDB.Driver.Core.WireProtocol.CommandResponseHandling.NoResponseExpected">
             <summary>
             No response is expected from the server.
+            </summary>
+        </member>
+        <member name="F:MongoDB.Driver.Core.WireProtocol.CommandResponseHandling.ExhaustAllowed">
+            <summary>
+            Multiple responses might be returned from the server (the ExhaustAllowed flag will be set).
             </summary>
         </member>
         <member name="T:MongoDB.Driver.Core.WireProtocol.CursorBatch`1">
@@ -15342,6 +16271,14 @@
             <param name="responseTo">The response to.</param>
             <param name="sections">The sections.</param>
             <param name="moreToCome">if set to <c>true</c> [more to come].</param>
+        </member>
+        <member name="P:MongoDB.Driver.Core.WireProtocol.Messages.CommandMessage.ExhaustAllowed">
+            <summary>
+            Gets or sets a value indicating whether multiple responses might be returned from the server or not.
+            </summary>
+            <value>
+              <c>true</c> if the server might return multiple responses; otherwise, <c>false</c>.
+            </value>
         </member>
         <member name="P:MongoDB.Driver.Core.WireProtocol.Messages.CommandMessage.MayBeCompressed">
             <inheritdoc />
@@ -16959,6 +17896,24 @@
             Represents a Query message.
             </summary>
         </member>
+        <member name="M:MongoDB.Driver.Core.WireProtocol.Messages.QueryMessage.#ctor(System.Int32,MongoDB.Driver.CollectionNamespace,MongoDB.Bson.BsonDocument,MongoDB.Bson.BsonDocument,MongoDB.Bson.IO.IElementNameValidator,System.Int32,System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Func{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.WireProtocol.Messages.QueryMessage" /> class.
+            </summary>
+            <param name="requestId">The request identifier.</param>
+            <param name="collectionNamespace">The collection namespace.</param>
+            <param name="query">The query.</param>
+            <param name="fields">The fields.</param>
+            <param name="queryValidator">The query validator.</param>
+            <param name="skip">The number of documents to skip.</param>
+            <param name="batchSize">The size of a batch.</param>
+            <param name="slaveOk">if set to <c>true</c> it is OK if the server is not the primary.</param>
+            <param name="partialOk">if set to <c>true</c> the server is allowed to return partial results if any shards are unavailable.</param>
+            <param name="noCursorTimeout">if set to <c>true</c> the server should not timeout the cursor.</param>
+            <param name="tailableCursor">if set to <c>true</c> the query should return a tailable cursor.</param>
+            <param name="awaitData">if set to <c>true</c> the server should await data (used with tailable cursors).</param>
+            <param name="shouldBeSent">A delegate that determines whether this message should be sent.</param>
+        </member>
         <member name="M:MongoDB.Driver.Core.WireProtocol.Messages.QueryMessage.#ctor(System.Int32,MongoDB.Driver.CollectionNamespace,MongoDB.Bson.BsonDocument,MongoDB.Bson.BsonDocument,MongoDB.Bson.IO.IElementNameValidator,System.Int32,System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Func{System.Boolean})">
             <summary>
             Initializes a new instance of the <see cref="T:MongoDB.Driver.Core.WireProtocol.Messages.QueryMessage" /> class.
@@ -17358,6 +18313,79 @@
             <summary>
             Called by the driver when the session is used (i.e. sent to the server).
             </summary>
+        </member>
+        <member name="T:MongoDB.Driver.CreateIndexCommitQuorum">
+            <summary>
+            Represents a create index commit quorum.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.CreateIndexCommitQuorum.Majority">
+            <summary>
+            Gets a create index commit quorum of majority.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.CreateIndexCommitQuorum.VotingMembers">
+            <summary>
+            Gets a create index commit quorum of voting members.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.CreateIndexCommitQuorum.Create(System.String)">
+            <summary>
+            Creates a create index commit quorum with a mode value.
+            </summary>
+            <param name="mode">The mode value.</param>
+            <returns>A create index commit quorum.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.CreateIndexCommitQuorum.Create(System.Int32)">
+            <summary>
+            Creates a create index commit quorum with a w value.
+            </summary>
+            <param name="w">The w value.</param>
+            <returns>A create index commit quorum.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.CreateIndexCommitQuorum.ToBsonValue">
+            <summary>
+            Converts the create index commit quorum to a BsonValue.
+            </summary>
+            <returns>A BsonValue.</returns>
+        </member>
+        <member name="T:MongoDB.Driver.CreateIndexCommitQuorumWithMode">
+            <summary>
+            Represents a CreateIndexCommitQuorum with a mode value.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.CreateIndexCommitQuorumWithMode.#ctor(System.String)">
+            <summary>
+            Initializes an instance of CreateIndexCommitQuorumWithMode.
+            </summary>
+            <param name="mode">The mode value.</param>
+        </member>
+        <member name="P:MongoDB.Driver.CreateIndexCommitQuorumWithMode.Mode">
+            <summary>
+            The mode value.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.CreateIndexCommitQuorumWithMode.ToBsonValue">
+            <inheritdoc/>
+        </member>
+        <member name="T:MongoDB.Driver.CreateIndexCommitQuorumWithW">
+            <summary>
+            Represents a CreateIndexCommitQuorum with a w value.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.CreateIndexCommitQuorumWithW.#ctor(System.Int32)">
+            <summary>
+            Initializes an instance of CreateIndexCommitQuorumWithW.
+            </summary>
+            <param name="w">The w value.</param>
+        </member>
+        <member name="P:MongoDB.Driver.CreateIndexCommitQuorumWithW.W">
+            <summary>
+            The w value.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.CreateIndexCommitQuorumWithW.ToBsonValue">
+            <inheritdoc/>
         </member>
         <member name="T:MongoDB.Driver.DatabaseNamespace">
             <summary>
@@ -17919,6 +18947,9 @@
             <param name="info">The SerializationInfo.</param>
             <param name="context">The StreamingContext.</param>
         </member>
+        <member name="P:MongoDB.Driver.MongoAuthenticationException.IsNetworkException">
+            <inheritdoc/>
+        </member>
         <member name="T:MongoDB.Driver.MongoClientException">
             <summary>
             Represents a MongoDB client exception.
@@ -18070,6 +19101,9 @@
             <param name="info">The SerializationInfo.</param>
             <param name="context">The StreamingContext.</param>
         </member>
+        <member name="P:MongoDB.Driver.MongoConnectionClosedException.IsNetworkException">
+            <inheritdoc/>
+        </member>
         <member name="T:MongoDB.Driver.MongoConnectionException">
             <summary>
             Represents a MongoDB connection exception.
@@ -18100,6 +19134,21 @@
         <member name="P:MongoDB.Driver.MongoConnectionException.ConnectionId">
             <summary>
             Gets the connection identifier.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.MongoConnectionException.ContainsSocketTimeoutException">
+            <summary>
+            Whether or not this exception contains a socket timeout exception.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.MongoConnectionException.ContainsTimeoutException">
+            <summary>
+            Whether or not this exception contains a timeout exception.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.MongoConnectionException.IsNetworkException">
+            <summary>
+            Determines whether the exception is network error or no.
             </summary>
         </member>
         <member name="M:MongoDB.Driver.MongoConnectionException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
@@ -18400,6 +19449,13 @@
             <summary>
             Represents a MongoDB server exception.
             </summary>
+        </member>
+        <member name="M:MongoDB.Driver.MongoServerException.AddErrorLabelsFromCommandResult(MongoDB.Driver.MongoServerException,MongoDB.Bson.BsonDocument)">
+            <summary>
+            Adds error labels from a command result document into the top-level label list.
+            </summary>
+            <param name="exception">The exception.</param>
+            <param name="result">The result document.</param>
         </member>
         <member name="M:MongoDB.Driver.MongoServerException.#ctor(MongoDB.Driver.Core.Connections.ConnectionId,System.String)">
             <summary>
@@ -18744,13 +19800,19 @@
             <param name="document">The document.</param>
             <returns>A ReadPreference.</returns>
         </member>
-        <member name="M:MongoDB.Driver.ReadPreference.#ctor(MongoDB.Driver.ReadPreferenceMode,System.Collections.Generic.IEnumerable{MongoDB.Driver.TagSet},System.Nullable{System.TimeSpan})">
+        <member name="M:MongoDB.Driver.ReadPreference.#ctor(MongoDB.Driver.ReadPreferenceMode,System.Collections.Generic.IEnumerable{MongoDB.Driver.TagSet},System.Nullable{System.TimeSpan},MongoDB.Driver.ReadPreferenceHedge)">
             <summary>
             Initializes a new instance of the <see cref="T:MongoDB.Driver.ReadPreference" /> class.
             </summary>
             <param name="mode">The read preference mode.</param>
             <param name="tagSets">The tag sets.</param>
             <param name="maxStaleness">The maximum staleness.</param>
+            <param name="hedge">The hedge.</param>
+        </member>
+        <member name="P:MongoDB.Driver.ReadPreference.Hedge">
+            <summary>
+            Gets the hedge.
+            </summary>
         </member>
         <member name="P:MongoDB.Driver.ReadPreference.MaxStaleness">
             <summary>
@@ -18788,6 +19850,13 @@
         <member name="M:MongoDB.Driver.ReadPreference.ToString">
             <inheritdoc/>
         </member>
+        <member name="M:MongoDB.Driver.ReadPreference.With(MongoDB.Driver.ReadPreferenceHedge)">
+            <summary>
+            Returns a new instance of ReadPreference with some values changed.
+            </summary>
+            <param name="hedge">The hedge.</param>
+            <returns>A new instance of ReadPreference.</returns>
+        </member>
         <member name="M:MongoDB.Driver.ReadPreference.With(MongoDB.Driver.ReadPreferenceMode)">
             <summary>
             Returns a new instance of ReadPreference with some values changed.
@@ -18808,6 +19877,50 @@
             </summary>
             <param name="maxStaleness">The maximum staleness.</param>
             <returns>A new instance of ReadPreference.</returns>
+        </member>
+        <member name="T:MongoDB.Driver.ReadPreferenceHedge">
+            <summary>
+            Represents a read preference hedge.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.ReadPreferenceHedge.Disabled">
+            <summary>
+            Gets a disabled read preference hedge.
+            </summary>
+        </member>
+        <member name="P:MongoDB.Driver.ReadPreferenceHedge.Enabled">
+            <summary>
+            Gets an enabled read preference hedge.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.ReadPreferenceHedge.#ctor(System.Boolean)">
+            <summary>
+            Initializes an instance of ReadPreferenceHedge.
+            </summary>
+            <param name="isEnabled">Whether hedged reads are enabled.</param>
+        </member>
+        <member name="P:MongoDB.Driver.ReadPreferenceHedge.IsEnabled">
+            <summary>
+            Gets whether hedged reads are enabled.
+            </summary>
+        </member>
+        <member name="M:MongoDB.Driver.ReadPreferenceHedge.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MongoDB.Driver.ReadPreferenceHedge.Equals(MongoDB.Driver.ReadPreferenceHedge)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MongoDB.Driver.ReadPreferenceHedge.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MongoDB.Driver.ReadPreferenceHedge.ToBsonDocument">
+            <summary>
+            Converts the read preference hedge to a BsonDocument.
+            </summary>
+            <returns>A BsonDocument.</returns>
+        </member>
+        <member name="M:MongoDB.Driver.ReadPreferenceHedge.ToString">
+            <inheritdoc/>
         </member>
         <member name="T:MongoDB.Driver.ReadPreferenceMode">
             <summary>
@@ -19357,6 +20470,23 @@
             <summary>
             Gets the wrapped result.
             </summary>
+        </member>
+        <member name="M:MongoDB.Shared.SecureStringHelper.ToInsecureString(System.Security.SecureString)">
+            <summary>
+            Should only be used when the safety of the data cannot be guaranteed.
+            For instance, when the secure string is a password used in a plain text protocol.
+            </summary>
+            <param name="secureString">The secure string.</param>
+            <returns>The CLR string.</returns>
+        </member>
+        <member name="M:MongoDB.Shared.SecureStringHelper.ToSecureString(System.String)">
+            <summary>
+            Converts <see cref="T:System.String"/> to <see cref="T:System.Security.SecureString"/>.
+            </summary>
+            <param name="value">The string value.</param>
+            <returns>
+            The secure string.
+            </returns>
         </member>
     </members>
 </doc>

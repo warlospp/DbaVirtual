@@ -1,3 +1,6 @@
+C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\snappy32.dll
+C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\snappy64.dll
+C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\libzstd.dll
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\mongocrypt.dll
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\DAL.dll.config
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\DAL.dll
@@ -24,6 +27,7 @@ C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\System.IO.Pipelin
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\System.Memory.dll
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\System.Numerics.Vectors.dll
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\System.Text.Encoding.CodePages.dll
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\System.Text.Encodings.Web.dll
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\System.Text.Json.dll
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\System.Threading.Channels.dll
@@ -40,7 +44,6 @@ C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\MongoDB.Driver.xm
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\MongoDB.Driver.Core.xml
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\MySqlConnector.xml
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\Newtonsoft.Json.xml
-C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\Npgsql.pdb
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\Npgsql.xml
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\Pipelines.Sockets.Unofficial.xml
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\Snappy.NET.xml
@@ -51,6 +54,7 @@ C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\System.IO.Pipelin
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\System.Memory.xml
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\System.Numerics.Vectors.xml
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\System.Text.Encoding.CodePages.xml
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\System.Text.Encodings.Web.xml
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\System.Text.Json.xml
 C:\Users\warlo\source\repos\TelemetriaSensores\DAL\bin\Release\System.Threading.Channels.xml

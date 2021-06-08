@@ -134,20 +134,23 @@
             </summary>
         </member>
         <member name="P:StackExchange.Redis.ClientInfo.FlagsRaw">
-            <summary>
-            The client flags can be a combination of:
-            O: the client is a slave in MONITOR mode
-            S: the client is a normal slave server
-            M: the client is a master
-            x: the client is in a MULTI/EXEC context
-            b: the client is waiting in a blocking operation
-            i: the client is waiting for a VM I/O (deprecated)
-            d: a watched keys has been modified - EXEC will fail
-            c: connection to be closed after writing entire reply
-            u: the client is unblocked
-            A: connection to be closed ASAP
-            N: no specific flag set
-            </summary>
+             <summary>
+             The client flags can be a combination of:
+            
+             A: connection to be closed ASAP
+             b: the client is waiting in a blocking operation
+             c: connection to be closed after writing entire reply
+             d: a watched keys has been modified - EXEC will fail
+             i: the client is waiting for a VM I/O (deprecated)
+             M: the client is a master
+             N: no specific flag set
+             O: the client is a replica in MONITOR mode
+             P: the client is a Pub/Sub subscriber
+             r: the client is in readonly mode against a cluster node
+             S: the client is a normal replica server
+             U: the client is connected via a Unix domain socket
+             x: the client is in a MULTI/EXEC context
+             </summary>
         </member>
         <member name="P:StackExchange.Redis.ClientInfo.Host">
             <summary>
@@ -336,7 +339,12 @@
         </member>
         <member name="P:StackExchange.Redis.ClusterNode.IsSlave">
             <summary>
-            Gets whether this node is a slave
+            Gets whether this node is a replica
+            </summary>
+        </member>
+        <member name="P:StackExchange.Redis.ClusterNode.IsReplica">
+            <summary>
+            Gets whether this node is a replica
             </summary>
         </member>
         <member name="P:StackExchange.Redis.ClusterNode.IsNoAddr">
@@ -923,7 +931,7 @@
         <member name="P:StackExchange.Redis.ConfigurationOptions.ResolveDns">
             <summary>
             Indicates whether endpoints should be resolved via DNS before connecting.
-            If enabled the ConnectionMultiplexer will re-resolve DNS
+            If enabled the ConnectionMultiplexer will not re-resolve DNS
             when attempting to re-connect after a connection failure.
             </summary>
         </member>
@@ -1006,6 +1014,11 @@
             Resolve the default port for any endpoints that did not have a port explicitly specified
             </summary>
         </member>
+        <member name="M:StackExchange.Redis.ConfigurationOptions.SetSentinelDefaults">
+            <summary>
+            Sets default config settings required for sentinel usage
+            </summary>
+        </member>
         <member name="M:StackExchange.Redis.ConfigurationOptions.ToString">
             <summary>
             Returns the effective configuration string for this configuration, including Redis credentials.
@@ -1054,7 +1067,7 @@
         <member name="P:StackExchange.Redis.ConnectionCounters.NonPreferredEndpointCount">
             <summary>
             Indicates the total number of messages despatched to a non-preferred endpoint, for example sent to a master
-            when the caller stated a preference of slave
+            when the caller stated a preference of replica
             </summary>
         </member>
         <member name="P:StackExchange.Redis.ConnectionCounters.OperationCount">
@@ -1245,7 +1258,7 @@
         <member name="E:StackExchange.Redis.ConnectionMultiplexer.ConfigurationChangedBroadcast">
             <summary>
             Raised when nodes are explicitly requested to reconfigure via broadcast;
-            this usually means master/slave changes
+            this usually means master/replica changes
             </summary>
         </member>
         <member name="P:StackExchange.Redis.ConnectionMultiplexer.TimeoutMilliseconds">
@@ -1319,7 +1332,67 @@
             <summary>
             Create a new ConnectionMultiplexer instance
             </summary>
-            <param name="configuration">The configurtion options to use for this multiplexer.</param>
+            <param name="configuration">The configuration options to use for this multiplexer.</param>
+            <param name="log">The <see cref="T:System.IO.TextWriter"/> to log to.</param>
+        </member>
+        <member name="M:StackExchange.Redis.ConnectionMultiplexer.SentinelConnect(System.String,System.IO.TextWriter)">
+            <summary>
+            Create a new ConnectionMultiplexer instance that connects to a sentinel server
+            </summary>
+            <param name="configuration">The string configuration to use for this multiplexer.</param>
+            <param name="log">The <see cref="T:System.IO.TextWriter"/> to log to.</param>
+        </member>
+        <member name="M:StackExchange.Redis.ConnectionMultiplexer.SentinelConnectAsync(System.String,System.IO.TextWriter)">
+            <summary>
+            Create a new ConnectionMultiplexer instance that connects to a sentinel server
+            </summary>
+            <param name="configuration">The string configuration to use for this multiplexer.</param>
+            <param name="log">The <see cref="T:System.IO.TextWriter"/> to log to.</param>
+        </member>
+        <member name="M:StackExchange.Redis.ConnectionMultiplexer.SentinelConnect(StackExchange.Redis.ConfigurationOptions,System.IO.TextWriter)">
+            <summary>
+            Create a new ConnectionMultiplexer instance that connects to a sentinel server
+            </summary>
+            <param name="configuration">The configuration options to use for this multiplexer.</param>
+            <param name="log">The <see cref="T:System.IO.TextWriter"/> to log to.</param>
+        </member>
+        <member name="M:StackExchange.Redis.ConnectionMultiplexer.SentinelConnectAsync(StackExchange.Redis.ConfigurationOptions,System.IO.TextWriter)">
+            <summary>
+            Create a new ConnectionMultiplexer instance that connects to a sentinel server
+            </summary>
+            <param name="configuration">The configuration options to use for this multiplexer.</param>
+            <param name="log">The <see cref="T:System.IO.TextWriter"/> to log to.</param>
+        </member>
+        <member name="M:StackExchange.Redis.ConnectionMultiplexer.SentinelMasterConnect(System.String,System.IO.TextWriter)">
+            <summary>
+            Create a new ConnectionMultiplexer instance that connects to a sentinel server, discovers the current master server
+            for the specified ServiceName in the config and returns a managed connection to the current master server
+            </summary>
+            <param name="configuration">The string configuration to use for this multiplexer.</param>
+            <param name="log">The <see cref="T:System.IO.TextWriter"/> to log to.</param>
+        </member>
+        <member name="M:StackExchange.Redis.ConnectionMultiplexer.SentinelMasterConnect(StackExchange.Redis.ConfigurationOptions,System.IO.TextWriter)">
+            <summary>
+            Create a new ConnectionMultiplexer instance that connects to a sentinel server, discovers the current master server
+            for the specified ServiceName in the config and returns a managed connection to the current master server
+            </summary>
+            <param name="configuration">The configuration options to use for this multiplexer.</param>
+            <param name="log">The <see cref="T:System.IO.TextWriter"/> to log to.</param>
+        </member>
+        <member name="M:StackExchange.Redis.ConnectionMultiplexer.SentinelMasterConnectAsync(System.String,System.IO.TextWriter)">
+            <summary>
+            Create a new ConnectionMultiplexer instance that connects to a sentinel server, discovers the current master server
+            for the specified ServiceName in the config and returns a managed connection to the current master server
+            </summary>
+            <param name="configuration">The string configuration to use for this multiplexer.</param>
+            <param name="log">The <see cref="T:System.IO.TextWriter"/> to log to.</param>
+        </member>
+        <member name="M:StackExchange.Redis.ConnectionMultiplexer.SentinelMasterConnectAsync(StackExchange.Redis.ConfigurationOptions,System.IO.TextWriter)">
+            <summary>
+            Create a new ConnectionMultiplexer instance that connects to a sentinel server, discovers the current master server
+            for the specified ServiceName in the config and returns a managed connection to the current master server
+            </summary>
+            <param name="configuration">The configuration options to use for this multiplexer.</param>
             <param name="log">The <see cref="T:System.IO.TextWriter"/> to log to.</param>
         </member>
         <member name="M:StackExchange.Redis.ConnectionMultiplexer.GetSubscriber(System.Object)">
@@ -1432,7 +1505,7 @@
             <summary>
             Switches the SentinelMasterConnection over to a new master.
             </summary>
-            <param name="switchBlame">The endpoing responsible for the switch</param>
+            <param name="switchBlame">The endpoint responsible for the switch</param>
             <param name="connection">The connection that should be switched over to a new master endpoint</param>
             <param name="log">Log to write to, if any</param>
         </member>
@@ -1605,6 +1678,13 @@
             <param name="host">The host to add.</param>
             <param name="port">The port for <paramref name="host"/> to add.</param>
         </member>
+        <member name="M:StackExchange.Redis.EndPointCollection.TryAdd(System.Net.EndPoint)">
+            <summary>
+            Try adding a new endpoint to the list.
+            </summary>
+            <param name="endpoint">The endpoint to add.</param>
+            <returns>True if the endpoint was added or false if not.</returns>
+        </member>
         <member name="M:StackExchange.Redis.EndPointCollection.InsertItem(System.Int32,System.Net.EndPoint)">
             <summary>
             See Collection&lt;T&gt;.InsertItem()
@@ -1687,8 +1767,8 @@
         <member name="T:StackExchange.Redis.ClientFlags">
             <summary>
             The client flags can be a combination of:
-            O: the client is a slave in MONITOR mode
-            S: the client is a normal slave server
+            O: the client is a replica in MONITOR mode
+            S: the client is a normal replica server
             M: the client is a master
             x: the client is in a MULTI/EXEC context
             b: the client is waiting in a blocking operation
@@ -1707,12 +1787,22 @@
         </member>
         <member name="F:StackExchange.Redis.ClientFlags.SlaveMonitor">
             <summary>
-            the client is a slave in MONITOR mode
+            the client is a replica in MONITOR mode
+            </summary>
+        </member>
+        <member name="F:StackExchange.Redis.ClientFlags.ReplicaMonitor">
+            <summary>
+            the client is a replica in MONITOR mode
             </summary>
         </member>
         <member name="F:StackExchange.Redis.ClientFlags.Slave">
             <summary>
-            the client is a normal slave server
+            the client is a normal replica server
+            </summary>
+        </member>
+        <member name="F:StackExchange.Redis.ClientFlags.Replica">
+            <summary>
+            the client is a normal replica server
             </summary>
         </member>
         <member name="F:StackExchange.Redis.ClientFlags.Master">
@@ -1750,6 +1840,21 @@
             connection to be closed ASAP
             </summary>
         </member>
+        <member name="F:StackExchange.Redis.ClientFlags.PubSubSubscriber">
+            <summary>
+            the client is a Pub/Sub subscriber
+            </summary>
+        </member>
+        <member name="F:StackExchange.Redis.ClientFlags.ReadOnlyCluster">
+            <summary>
+            the client is in readonly mode against a cluster node
+            </summary>
+        </member>
+        <member name="F:StackExchange.Redis.ClientFlags.UnixDomainSocket">
+            <summary>
+            the client is connected via a Unix domain socket
+            </summary>
+        </member>
         <member name="T:StackExchange.Redis.ClientType">
             <summary>
             The class of the connection
@@ -1758,6 +1863,11 @@
         <member name="F:StackExchange.Redis.ClientType.Normal">
             <summary>
             Regular connections, including MONITOR connections
+            </summary>
+        </member>
+        <member name="F:StackExchange.Redis.ClientType.Replica">
+            <summary>
+            Replication connections
             </summary>
         </member>
         <member name="F:StackExchange.Redis.ClientType.Slave">
@@ -1794,7 +1904,7 @@
         <member name="F:StackExchange.Redis.CommandFlags.PreferMaster">
             <summary>
             This operation should be performed on the master if it is available, but read operations may
-            be performed on a slave if no master is available. This is the default option.
+            be performed on a replica if no master is available. This is the default option.
             </summary>
         </member>
         <member name="F:StackExchange.Redis.CommandFlags.DemandMaster">
@@ -1804,13 +1914,24 @@
         </member>
         <member name="F:StackExchange.Redis.CommandFlags.PreferSlave">
             <summary>
-            This operation should be performed on the slave if it is available, but will be performed on
-            a master if no slaves are available. Suitable for read operations only.
+            This operation should be performed on the replica if it is available, but will be performed on
+            a master if no replicas are available. Suitable for read operations only.
+            </summary>
+        </member>
+        <member name="F:StackExchange.Redis.CommandFlags.PreferReplica">
+            <summary>
+            This operation should be performed on the replica if it is available, but will be performed on
+            a master if no replicas are available. Suitable for read operations only.
+            </summary>
+        </member>
+        <member name="F:StackExchange.Redis.CommandFlags.DemandReplica">
+            <summary>
+            This operation should only be performed on a replica. Suitable for read operations only.
             </summary>
         </member>
         <member name="F:StackExchange.Redis.CommandFlags.DemandSlave">
             <summary>
-            This operation should only be performed on a slave. Suitable for read operations only.
+            This operation should only be performed on a replica. Suitable for read operations only.
             </summary>
         </member>
         <member name="F:StackExchange.Redis.CommandFlags.NoRedirect">
@@ -2132,7 +2253,12 @@
         </member>
         <member name="F:StackExchange.Redis.ReplicationChangeOptions.EnslaveSubordinates">
             <summary>
-            Issue a SLAVEOF to all other known nodes, making this this master of all
+            Issue a REPLICAOF to all other known nodes, making this this master of all
+            </summary>
+        </member>
+        <member name="F:StackExchange.Redis.ReplicationChangeOptions.ReplicateToOtherEndpoints">
+            <summary>
+            Issue a REPLICAOF to all other known nodes, making this this master of all
             </summary>
         </member>
         <member name="F:StackExchange.Redis.ReplicationChangeOptions.All">
@@ -2970,7 +3096,7 @@
         <member name="E:StackExchange.Redis.IConnectionMultiplexer.ConfigurationChangedBroadcast">
             <summary>
             Raised when nodes are explicitly requested to reconfigure via broadcast;
-            this usually means master/slave changes
+            this usually means master/replica changes
             </summary>
         </member>
         <member name="M:StackExchange.Redis.IConnectionMultiplexer.GetEndPoints(System.Boolean)">
@@ -3380,7 +3506,7 @@
             For every field that does not exist in the hash, a nil value is returned.Because a non-existing keys are treated as empty hashes, running HMGET against a non-existing key will return a list of nil values.
             </summary>
             <param name="key">The key of the hash.</param>
-            <param name="hashFields">The fields in the hash to delete.</param>
+            <param name="hashFields">The fields in the hash to get.</param>
             <param name="flags">The flags to use for this operation.</param>
             <returns>List of values associated with the given fields, in the same order as they are requested.</returns>
             <remarks>https://redis.io/commands/hmget</remarks>
@@ -3775,6 +3901,18 @@
             <remarks>https://redis.io/commands/lpush</remarks>
             <remarks>https://redis.io/commands/lpushx</remarks>
         </member>
+        <member name="M:StackExchange.Redis.IDatabase.ListLeftPush(StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue[],StackExchange.Redis.When,StackExchange.Redis.CommandFlags)">
+            <summary>
+            Insert the specified value at the head of the list stored at key. If key does not exist, it is created as empty list before performing the push operations.
+            </summary>
+            <param name="key">The key of the list.</param>
+            <param name="values">The values to add to the head of the list.</param>
+            <param name="when">Which conditions to add to the list under (defaults to always).</param>
+            <param name="flags">The flags to use for this operation.</param>
+            <returns>The length of the list after the push operations.</returns>
+            <remarks>https://redis.io/commands/lpush</remarks>
+            <remarks>https://redis.io/commands/lpushx</remarks>
+        </member>
         <member name="M:StackExchange.Redis.IDatabase.ListLeftPush(StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue[],StackExchange.Redis.CommandFlags)">
             <summary>
             Insert all the specified values at the head of the list stored at key. If key does not exist, it is created as empty list before performing the push operations.
@@ -3847,6 +3985,18 @@
             </summary>
             <param name="key">The key of the list.</param>
             <param name="value">The value to add to the tail of the list.</param>
+            <param name="when">Which conditions to add to the list under.</param>
+            <param name="flags">The flags to use for this operation.</param>
+            <returns>The length of the list after the push operation.</returns>
+            <remarks>https://redis.io/commands/rpush</remarks>
+            <remarks>https://redis.io/commands/rpushx</remarks>
+        </member>
+        <member name="M:StackExchange.Redis.IDatabase.ListRightPush(StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue[],StackExchange.Redis.When,StackExchange.Redis.CommandFlags)">
+            <summary>
+            Insert the specified value at the tail of the list stored at key. If key does not exist, it is created as empty list before performing the push operation.
+            </summary>
+            <param name="key">The key of the list.</param>
+            <param name="values">The values to add to the tail of the list.</param>
             <param name="when">Which conditions to add to the list under.</param>
             <param name="flags">The flags to use for this operation.</param>
             <returns>The length of the list after the push operation.</returns>
@@ -5369,7 +5519,7 @@
             For every field that does not exist in the hash, a nil value is returned.Because a non-existing keys are treated as empty hashes, running HMGET against a non-existing key will return a list of nil values.
             </summary>
             <param name="key">The key of the hash.</param>
-            <param name="hashFields">The fields in the hash to delete.</param>
+            <param name="hashFields">The fields in the hash to get.</param>
             <param name="flags">The flags to use for this operation.</param>
             <returns>List of values associated with the given fields, in the same order as they are requested.</returns>
             <remarks>https://redis.io/commands/hmget</remarks>
@@ -5753,6 +5903,18 @@
             <remarks>https://redis.io/commands/lpush</remarks>
             <remarks>https://redis.io/commands/lpushx</remarks>
         </member>
+        <member name="M:StackExchange.Redis.IDatabaseAsync.ListLeftPushAsync(StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue[],StackExchange.Redis.When,StackExchange.Redis.CommandFlags)">
+            <summary>
+            Insert the specified value at the head of the list stored at key. If key does not exist, it is created as empty list before performing the push operations.
+            </summary>
+            <param name="key">The key of the list.</param>
+            <param name="values">The value to add to the head of the list.</param>
+            <param name="when">Which conditions to add to the list under (defaults to always).</param>
+            <param name="flags">The flags to use for this operation.</param>
+            <returns>The length of the list after the push operations.</returns>
+            <remarks>https://redis.io/commands/lpush</remarks>
+            <remarks>https://redis.io/commands/lpushx</remarks>
+        </member>
         <member name="M:StackExchange.Redis.IDatabaseAsync.ListLeftPushAsync(StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue[],StackExchange.Redis.CommandFlags)">
             <summary>
             Insert all the specified values at the head of the list stored at key. If key does not exist, it is created as empty list before performing the push operations.
@@ -5825,6 +5987,18 @@
             </summary>
             <param name="key">The key of the list.</param>
             <param name="value">The value to add to the tail of the list.</param>
+            <param name="when">Which conditions to add to the list under.</param>
+            <param name="flags">The flags to use for this operation.</param>
+            <returns>The length of the list after the push operation.</returns>
+            <remarks>https://redis.io/commands/rpush</remarks>
+            <remarks>https://redis.io/commands/rpushx</remarks>
+        </member>
+        <member name="M:StackExchange.Redis.IDatabaseAsync.ListRightPushAsync(StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue[],StackExchange.Redis.When,StackExchange.Redis.CommandFlags)">
+            <summary>
+            Insert the specified value at the tail of the list stored at key. If key does not exist, it is created as empty list before performing the push operation.
+            </summary>
+            <param name="key">The key of the list.</param>
+            <param name="values">The values to add to the tail of the list.</param>
             <param name="when">Which conditions to add to the list under.</param>
             <param name="flags">The flags to use for this operation.</param>
             <returns>The length of the list after the push operation.</returns>
@@ -7201,12 +7375,22 @@
         </member>
         <member name="P:StackExchange.Redis.IServer.IsSlave">
             <summary>
-            Gets whether the connected server is a replica / slave
+            Gets whether the connected server is a replica
+            </summary>
+        </member>
+        <member name="P:StackExchange.Redis.IServer.IsReplica">
+            <summary>
+            Gets whether the connected server is a replica
             </summary>
         </member>
         <member name="P:StackExchange.Redis.IServer.AllowSlaveWrites">
             <summary>
-            Explicitly opt in for slave writes on writable slaves
+            Explicitly opt in for replica writes on writable replica
+            </summary>
+        </member>
+        <member name="P:StackExchange.Redis.IServer.AllowReplicaWrites">
+            <summary>
+            Explicitly opt in for replica writes on writable replica
             </summary>
         </member>
         <member name="P:StackExchange.Redis.IServer.ServerType">
@@ -7576,6 +7760,18 @@
             <param name="options">The options to use for this topology change.</param>
             <param name="log">The log to write output to.</param>
         </member>
+        <member name="M:StackExchange.Redis.IServer.Role(StackExchange.Redis.CommandFlags)">
+            <summary>
+            Returns the role info for the current server.
+            </summary>
+            <remarks>https://redis.io/commands/role</remarks>
+        </member>
+        <member name="M:StackExchange.Redis.IServer.RoleAsync(StackExchange.Redis.CommandFlags)">
+            <summary>
+            Returns the role info for the current server.
+            </summary>
+            <remarks>https://redis.io/commands/role</remarks>
+        </member>
         <member name="M:StackExchange.Redis.IServer.Save(StackExchange.Redis.SaveType,StackExchange.Redis.CommandFlags)">
             <summary>
             Explicitly request the database to persist the current state to disk
@@ -7676,19 +7872,35 @@
         </member>
         <member name="M:StackExchange.Redis.IServer.SlaveOf(System.Net.EndPoint,StackExchange.Redis.CommandFlags)">
             <summary>
-            The SLAVEOF command can change the replication settings of a slave on the fly. If a Redis server is already acting as slave, specifying a null master will turn off the replication, turning the Redis server into a MASTER. Specifying a non-null master will make the server a slave of another server listening at the specified hostname and port.
+            The REPLICAOF command can change the replication settings of a replica on the fly. If a Redis server is already acting as replica, specifying a null master will turn off the replication, turning the Redis server into a MASTER. Specifying a non-null master will make the server a replica of another server listening at the specified hostname and port.
             </summary>
-            <param name="master">Endpoint of the new master to slave to.</param>
+            <param name="master">Endpoint of the new master to replicate from.</param>
             <param name="flags">The command flags to use.</param>
-            <remarks>https://redis.io/commands/slaveof</remarks>
+            <remarks>https://redis.io/commands/replicaof</remarks>
+        </member>
+        <member name="M:StackExchange.Redis.IServer.ReplicaOf(System.Net.EndPoint,StackExchange.Redis.CommandFlags)">
+            <summary>
+            The REPLICAOF command can change the replication settings of a replica on the fly. If a Redis server is already acting as replica, specifying a null master will turn off the replication, turning the Redis server into a MASTER. Specifying a non-null master will make the server a replica of another server listening at the specified hostname and port.
+            </summary>
+            <param name="master">Endpoint of the new master to replicate from.</param>
+            <param name="flags">The command flags to use.</param>
+            <remarks>https://redis.io/commands/replicaof</remarks>
         </member>
         <member name="M:StackExchange.Redis.IServer.SlaveOfAsync(System.Net.EndPoint,StackExchange.Redis.CommandFlags)">
             <summary>
-            The SLAVEOF command can change the replication settings of a slave on the fly. If a Redis server is already acting as slave, specifying a null master will turn off the replication, turning the Redis server into a MASTER. Specifying a non-null master will make the server a slave of another server listening at the specified hostname and port.
+            The REPLICAOF command can change the replication settings of a replica on the fly. If a Redis server is already acting as replica, specifying a null master will turn off the replication, turning the Redis server into a MASTER. Specifying a non-null master will make the server a replica of another server listening at the specified hostname and port.
             </summary>
-            <param name="master">Endpoint of the new master to slave to.</param>
+            <param name="master">Endpoint of the new master to replicate from.</param>
             <param name="flags">The command flags to use.</param>
-            <remarks>https://redis.io/commands/slaveof</remarks>
+            <remarks>https://redis.io/commands/replicaof</remarks>
+        </member>
+        <member name="M:StackExchange.Redis.IServer.ReplicaOfAsync(System.Net.EndPoint,StackExchange.Redis.CommandFlags)">
+            <summary>
+            The REPLICAOF command can change the replication settings of a replica on the fly. If a Redis server is already acting as replica, specifying a null master will turn off the replication, turning the Redis server into a MASTER. Specifying a non-null master will make the server a replica of another server listening at the specified hostname and port.
+            </summary>
+            <param name="master">Endpoint of the new master to replicate from.</param>
+            <param name="flags">The command flags to use.</param>
+            <remarks>https://redis.io/commands/replicaof</remarks>
         </member>
         <member name="M:StackExchange.Redis.IServer.SlowlogGet(System.Int32,StackExchange.Redis.CommandFlags)">
             <summary>
@@ -7905,7 +8117,7 @@
         <member name="M:StackExchange.Redis.IServer.SentinelGetMasterAddressByName(System.String,StackExchange.Redis.CommandFlags)">
             <summary>
             Returns the ip and port number of the master with that name. 
-            If a failover is in progress or terminated successfully for this master it returns the address and port of the promoted slave.
+            If a failover is in progress or terminated successfully for this master it returns the address and port of the promoted replica.
             </summary>
             <param name="serviceName">The sentinel service name.</param>
             <param name="flags">The command flags to use.</param>
@@ -7915,7 +8127,7 @@
         <member name="M:StackExchange.Redis.IServer.SentinelGetMasterAddressByNameAsync(System.String,StackExchange.Redis.CommandFlags)">
             <summary>
             Returns the ip and port number of the master with that name. 
-            If a failover is in progress or terminated successfully for this master it returns the address and port of the promoted slave.
+            If a failover is in progress or terminated successfully for this master it returns the address and port of the promoted replica.
             </summary>
             <param name="serviceName">The sentinel service name.</param>
             <param name="flags">The command flags to use.</param>
@@ -7928,7 +8140,7 @@
             for the given service name.
             </summary>
             <param name="serviceName">the sentinel service name</param>
-            <param name="flags"></param>
+            <param name="flags">The command flags to use.</param>
             <returns>a list of the sentinel ips and ports</returns>
         </member>
         <member name="M:StackExchange.Redis.IServer.SentinelGetSentinelAddressesAsync(System.String,StackExchange.Redis.CommandFlags)">
@@ -7937,8 +8149,26 @@
             for the given service name.
             </summary>
             <param name="serviceName">the sentinel service name</param>
-            <param name="flags"></param>
+            <param name="flags">The command flags to use.</param>
             <returns>a list of the sentinel ips and ports</returns>
+        </member>
+        <member name="M:StackExchange.Redis.IServer.SentinelGetReplicaAddresses(System.String,StackExchange.Redis.CommandFlags)">
+            <summary>
+            Returns the ip and port numbers of all known Sentinel replicas
+            for the given service name.
+            </summary>
+            <param name="serviceName">the sentinel service name</param>
+            <param name="flags">The command flags to use.</param>
+            <returns>a list of the replica ips and ports</returns>
+        </member>
+        <member name="M:StackExchange.Redis.IServer.SentinelGetReplicaAddressesAsync(System.String,StackExchange.Redis.CommandFlags)">
+            <summary>
+            Returns the ip and port numbers of all known Sentinel replicas
+            for the given service name.
+            </summary>
+            <param name="serviceName">the sentinel service name</param>
+            <param name="flags">The command flags to use.</param>
+            <returns>a list of the replica ips and ports</returns>
         </member>
         <member name="M:StackExchange.Redis.IServer.SentinelMaster(System.String,StackExchange.Redis.CommandFlags)">
             <summary>
@@ -7976,20 +8206,38 @@
         </member>
         <member name="M:StackExchange.Redis.IServer.SentinelSlaves(System.String,StackExchange.Redis.CommandFlags)">
             <summary>
-            Show a list of slaves for this master, and their state.
+            Show a list of replicas for this master, and their state.
             </summary>
             <param name="serviceName">The sentinel service name.</param>
             <param name="flags">The command flags to use.</param>
-            <returns>an array of slave state KeyValuePair arrays</returns>
+            <returns>an array of replica state KeyValuePair arrays</returns>
+            <remarks>https://redis.io/topics/sentinel</remarks>
+        </member>
+        <member name="M:StackExchange.Redis.IServer.SentinelReplicas(System.String,StackExchange.Redis.CommandFlags)">
+            <summary>
+            Show a list of replicas for this master, and their state.
+            </summary>
+            <param name="serviceName">The sentinel service name.</param>
+            <param name="flags">The command flags to use.</param>
+            <returns>an array of replica state KeyValuePair arrays</returns>
             <remarks>https://redis.io/topics/sentinel</remarks>
         </member>
         <member name="M:StackExchange.Redis.IServer.SentinelSlavesAsync(System.String,StackExchange.Redis.CommandFlags)">
             <summary>
-            Show a list of slaves for this master, and their state.
+            Show a list of replicas for this master, and their state.
             </summary>
             <param name="serviceName">The sentinel service name.</param>
             <param name="flags">The command flags to use.</param>
-            <returns>an array of slave state KeyValuePair arrays</returns>
+            <returns>an array of replica state KeyValuePair arrays</returns>
+            <remarks>https://redis.io/topics/sentinel</remarks>
+        </member>
+        <member name="M:StackExchange.Redis.IServer.SentinelReplicasAsync(System.String,StackExchange.Redis.CommandFlags)">
+            <summary>
+            Show a list of replicas for this master, and their state.
+            </summary>
+            <param name="serviceName">The sentinel service name.</param>
+            <param name="flags">The command flags to use.</param>
+            <returns>an array of replica state KeyValuePair arrays</returns>
             <remarks>https://redis.io/topics/sentinel</remarks>
         </member>
         <member name="M:StackExchange.Redis.IServer.SentinelFailover(System.String,StackExchange.Redis.CommandFlags)">
@@ -9139,7 +9387,12 @@
         </member>
         <member name="P:StackExchange.Redis.RedisFeatures.HyperLogLogCountSlaveSafe">
             <summary>
-            Is PFCOUNT supported on slaves?
+            Is PFCOUNT supported on replicas?
+            </summary>
+        </member>
+        <member name="P:StackExchange.Redis.RedisFeatures.HyperLogLogCountReplicaSafe">
+            <summary>
+            Is PFCOUNT supported on replicas?
             </summary>
         </member>
         <member name="P:StackExchange.Redis.RedisFeatures.Geo">
@@ -9165,6 +9418,16 @@
         <member name="P:StackExchange.Redis.RedisFeatures.KeyTouch">
             <summary>
             Are the Touch command available?
+            </summary>
+        </member>
+        <member name="P:StackExchange.Redis.RedisFeatures.ReplicaCommands">
+            <summary>
+            Does the server prefer 'replica' terminology - 'REPLICAOF', etc?
+            </summary>
+        </member>
+        <member name="P:StackExchange.Redis.RedisFeatures.PushMultiple">
+            <summary>
+            Do list-push commands support multiple arguments?
             </summary>
         </member>
         <member name="M:StackExchange.Redis.RedisFeatures.ToString">
@@ -9529,6 +9792,7 @@
             <summary>
             Interprets a multi-bulk result with successive key/name values as a dictionary keyed by name
             </summary>
+            <param name="comparer">The key comparator to use, or <see cref="P:System.StringComparer.InvariantCultureIgnoreCase"/> by default</param>
         </member>
         <member name="M:StackExchange.Redis.RedisResult.Create(StackExchange.Redis.RedisKey)">
             <summary>
@@ -9929,6 +10193,98 @@
             The value of this record
             </summary>
         </member>
+        <member name="T:StackExchange.Redis.Role">
+            <summary>
+            Result of the ROLE command. Values depend on the role: master, replica, or sentinel.
+            </summary>
+            <remarks>https://redis.io/commands/role</remarks>
+        </member>
+        <member name="P:StackExchange.Redis.Role.Value">
+            <summary>
+            One of "master", "slave" (aka replica), or "sentinel".
+            </summary>
+        </member>
+        <member name="M:StackExchange.Redis.Role.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:StackExchange.Redis.Role.Master">
+            <summary>
+            Result of the ROLE command for a master node.
+            </summary>
+            <remarks>https://redis.io/commands/role#master-output</remarks>
+        </member>
+        <member name="P:StackExchange.Redis.Role.Master.ReplicationOffset">
+            <summary>
+            The replication offset. To be consumed by replica nodes.
+            </summary>
+        </member>
+        <member name="P:StackExchange.Redis.Role.Master.Replicas">
+            <summary>
+            Connected replica nodes.
+            </summary>
+        </member>
+        <member name="T:StackExchange.Redis.Role.Master.Replica">
+            <summary>
+            A connected replica node.
+            </summary>
+        </member>
+        <member name="P:StackExchange.Redis.Role.Master.Replica.Ip">
+            <summary>
+            The IP address of this replica node.
+            </summary>
+        </member>
+        <member name="P:StackExchange.Redis.Role.Master.Replica.Port">
+            <summary>
+            The port number of this replica node.
+            </summary>
+        </member>
+        <member name="P:StackExchange.Redis.Role.Master.Replica.ReplicationOffset">
+            <summary>
+            The last replication offset acked by this replica node.
+            </summary>
+        </member>
+        <member name="T:StackExchange.Redis.Role.Replica">
+            <summary>
+            Result of the ROLE command for a replica node.
+            </summary>
+            <remarks>https://redis.io/commands/role#output-of-the-command-on-replicas</remarks>
+        </member>
+        <member name="P:StackExchange.Redis.Role.Replica.MasterIp">
+            <summary>
+            The IP address of the master node for this replica.
+            </summary>
+        </member>
+        <member name="P:StackExchange.Redis.Role.Replica.MasterPort">
+            <summary>
+            The port number of the master node for this replica.
+            </summary>
+        </member>
+        <member name="P:StackExchange.Redis.Role.Replica.State">
+            <summary>
+            This replica's replication state.
+            </summary>
+        </member>
+        <member name="P:StackExchange.Redis.Role.Replica.ReplicationOffset">
+            <summary>
+            The last replication offset received by this replica.
+            </summary>
+        </member>
+        <member name="T:StackExchange.Redis.Role.Sentinel">
+            <summary>
+            Result of the ROLE command for a sentinel node.
+            </summary>
+            <remarks>https://redis.io/commands/role#sentinel-output</remarks>
+        </member>
+        <member name="P:StackExchange.Redis.Role.Sentinel.MonitoredMasters">
+            <summary>
+            Master names monitored by this sentinel node.
+            </summary>
+        </member>
+        <member name="T:StackExchange.Redis.Role.Unknown">
+            <summary>
+            An unexpected result of the ROLE command.
+            </summary>
+        </member>
         <member name="M:StackExchange.Redis.ScriptParameterMapper.PrepareScript(System.String)">
             <summary>
             Turns a script with @namedParameters into a LuaScript that can be executed
@@ -10318,6 +10674,11 @@
             <summary>
             The total number of pending messages for the consumer group. A pending message is one that has been
             received by a consumer but not yet acknowledged.
+            </summary>
+        </member>
+        <member name="P:StackExchange.Redis.StreamGroupInfo.LastDeliveredId">
+            <summary>
+            The Id of the last message delivered to the group
             </summary>
         </member>
         <member name="T:StackExchange.Redis.StreamInfo">

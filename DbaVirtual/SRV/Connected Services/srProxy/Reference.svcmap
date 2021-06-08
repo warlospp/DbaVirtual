@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="21eb4ed8-3dae-4fc1-8ab7-928a2016094c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="DTO" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:54889/wcfChatBot.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="wcfChatBot.xsd" MetadataType="Schema" ID="c7543486-9df2-4770-ba60-5d404fc60a78" SourceId="1" SourceUrl="http://localhost:54889/wcfChatBot.svc?xsd=xsd0" />
+    <MetadataFile FileName="wcfChatBot1.xsd" MetadataType="Schema" ID="9b2f854c-f979-4988-882a-26d4a7ba8118" SourceId="1" SourceUrl="http://localhost:54889/wcfChatBot.svc?xsd=xsd1" />
+    <MetadataFile FileName="wcfChatBot.wsdl" MetadataType="Wsdl" ID="faf105f4-0e6a-446e-a436-22724b4f5286" SourceId="1" SourceUrl="http://localhost:54889/wcfChatBot.svc?wsdl" />
+    <MetadataFile FileName="wcfChatBot2.xsd" MetadataType="Schema" ID="ed01f7fe-3f24-4604-a36a-110030b58a3a" SourceId="1" SourceUrl="http://localhost:54889/wcfChatBot.svc?xsd=xsd2" />
+    <MetadataFile FileName="wcfChatBot.disco" MetadataType="Disco" ID="73da1883-748b-41db-9544-7ece2e0d3bea" SourceId="1" SourceUrl="http://localhost:54889/wcfChatBot.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,7 +1,9 @@
 ﻿using CMN;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Configuration;
+using System.Net.Http;
 using System.ServiceProcess;
 using System.Threading;
 using System.Timers;
@@ -17,6 +19,30 @@ namespace SRV
             get
             {
                 return ConfigurationManager.AppSettings["intervalo"];
+            }
+        }
+
+        private string strRapidApi
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["RapidApi"];
+            }
+        }
+
+        private string strRapidKey
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["RapidKey"];
+            }
+        }
+
+        private string strRapidHost
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["RapidHost"];
             }
         }
 
@@ -48,8 +74,48 @@ namespace SRV
         {
             try
             {
-                await new RestClient(Program.strUrl + "insertarAlerta/3/" + DateTime.Now.ToString("yyyy-MM-dd HH_mm_ss.fff") + "/" + ((double)new Random().Next(13, 37) + 0.2).ToString()).ExecuteAsync((IRestRequest)new RestRequest(), new CancellationToken());
-                await new RestClient(Program.strUrl + "insertarAlerta/4/" + DateTime.Now.ToString("yyyy-MM-dd HH_mm_ss.fff") + "/" + ((double)new Random().Next(12, 38) + 0.1).ToString()).ExecuteAsync((IRestRequest)new RestRequest(), new CancellationToken());
+                var client = new HttpClient();
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = new Uri(this.strRapidApi),
+                    Headers =
+                    {
+                        { "x-rapidapi-key", this.strRapidKey },
+                        { "x-rapidapi-host", this.strRapidHost },
+                    },
+                };
+                using (var response = await client.SendAsync(request))
+                {
+                    response.EnsureSuccessStatusCode();
+                    var body = await response.Content.ReadAsStringAsync();
+                    body = body.Replace("telemetria(", "").Replace(")", "");
+                    JObject obj = JObject.Parse(body);
+                    JObject subObjs = (JObject)obj["main"];
+                    foreach (JProperty parsedProperty in subObjs.Properties())
+                    {
+                        if (parsedProperty.Name == "feels_like")
+                        {
+                            string strValor = (string)parsedProperty.Value;
+                            await new RestClient(Program.strUrl + "insertarAlerta/3/" + DateTime.Now.ToString("yyyy-MM-dd HH_mm_ss.fff") + "/" + strValor).ExecuteAsync((IRestRequest)new RestRequest(), new CancellationToken());
+                        }
+                        else if (parsedProperty.Name == "humidity")
+                        {
+                            string strValor = (string)parsedProperty.Value;
+                            await new RestClient(Program.strUrl + "insertarAlerta/4/" + DateTime.Now.ToString("yyyy-MM-dd HH_mm_ss.fff") + "/" + strValor).ExecuteAsync((IRestRequest)new RestRequest(), new CancellationToken());
+                        }
+                        else if (parsedProperty.Name == "humidity")
+                        {
+                            string strValor = (string)parsedProperty.Value;
+                            await new RestClient(Program.strUrl + "insertarAlerta/4/" + DateTime.Now.ToString("yyyy-MM-dd HH_mm_ss.fff") + "/" + strValor).ExecuteAsync((IRestRequest)new RestRequest(), new CancellationToken());
+                        }
+                        else if (parsedProperty.Name == "pressure")
+                        {
+                            string strValor = (string)parsedProperty.Value;
+                            await new RestClient(Program.strUrl + "insertarAlerta/5/" + DateTime.Now.ToString("yyyy-MM-dd HH_mm_ss.fff") + "/" + strValor).ExecuteAsync((IRestRequest)new RestRequest(), new CancellationToken());
+                        }
+                    }                   
+                }
                 Program.logger.Info("Inserción de Alerta");
             }
             catch (Exception ex)

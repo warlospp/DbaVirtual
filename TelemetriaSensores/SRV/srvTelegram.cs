@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Linq;
 using System.ServiceProcess;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using Telegram.Bot;
 using Telegram.Bot.Args;
@@ -24,13 +25,21 @@ namespace SRV
         private ReplyKeyboardMarkup rkmConfirmacion = new ReplyKeyboardMarkup();
 
         private readonly List<string> strSaludar = ConfigurationManager.AppSettings["saludar"].Split(',').ToList();
+        private readonly string strStickerSaludar = ConfigurationManager.AppSettings["stickerSaludar"];
+
         private readonly List<string> strAceptar = ConfigurationManager.AppSettings["aceptar"].Split(',').ToList();
-        private readonly List<string> strDespedir = ConfigurationManager.AppSettings["despedir"].Split(',').ToList();
+        private readonly string strStickerAceptar = ConfigurationManager.AppSettings["stickerAceptar"];
+
         private readonly List<string> strDetener = ConfigurationManager.AppSettings["detener"].Split(',').ToList();
         private readonly List<string> strIniciar = ConfigurationManager.AppSettings["iniciar"].Split(',').ToList();
         private readonly List<string> strActualizar = ConfigurationManager.AppSettings["actualizar"].Split(',').ToList();
-        private readonly List<string> strReservado = ConfigurationManager.AppSettings["reservado"].Split(',').ToList();
+        private readonly string strStickerOpciones = ConfigurationManager.AppSettings["stickerOpciones"];
 
+        private readonly List<string> strDespedir = ConfigurationManager.AppSettings["despedir"].Split(',').ToList();
+        private readonly string strStickerDespedir = ConfigurationManager.AppSettings["stickerDespedir"];
+      
+        private readonly List<string> strReservado = ConfigurationManager.AppSettings["reservado"].Split(',').ToList();
+        private readonly string strStickerError = ConfigurationManager.AppSettings["stickerError"];
         public srvTelegram()
         {
             InitializeComponent();
@@ -40,7 +49,13 @@ namespace SRV
                 new KeyboardButton[]
                 {
                     new KeyboardButton("Detener ❌"),
-                    new KeyboardButton("Iniciar ✅"),
+                },
+                new KeyboardButton[]
+                {
+                    new KeyboardButton("Iniciar ✅")
+                },
+                new KeyboardButton[]
+                {
                     new KeyboardButton("Actualizar ⚠")
                 }
                };
@@ -64,8 +79,8 @@ namespace SRV
             {
                 var me = bot.GetMeAsync().Result;
                 strUsuario = me.Username;               
-                bot.OnMessage += onLeerMensajes;
-                bot.OnReceiveError += onErrorRecibido;
+                bot.OnMessage += this.onLeerMensajes;
+                bot.OnReceiveError += this.onErrorRecibido;
                 bot.StartReceiving(Array.Empty<UpdateType>());
             }
             catch (Exception ex)
@@ -83,61 +98,76 @@ namespace SRV
                 if (mensaje == null || mensaje.Type != MessageType.Text)
                     return;
 
-                string strOp = mensaje.Text.ToLower().Split(' ').First();
+                string strOp = Regex.Replace(mensaje.Text, @"[^\u0000-\u007F]+", string.Empty).TrimEnd().TrimStart().Split(' ').First().ToLower();
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine();
                 switch (strOp)
                 {
                     case var expression when (strSaludar.Contains(strOp)):
                         sb.AppendFormat("Hola 😊 ‼ yo soy <b><a>@{0}</a></b>.", strUsuario);
-                        sb.AppendLine();
+                        await bot.SendTextMessageAsync(mensaje.Chat.Id, sb.ToString(), ParseMode.Html, false, false, 0, new ReplyKeyboardRemove(), new CancellationToken());
+                        await bot.SendStickerAsync(mensaje.Chat.Id, this.strStickerSaludar, true, 0, new ReplyKeyboardRemove(), new CancellationToken());
+                        sb = new StringBuilder();
                         sb.AppendFormat("En qué te puedo ayudar❓");
-                        sb.AppendLine();
-                        await bot.SendTextMessageAsync(mensaje.Chat.Id, sb.ToString(), ParseMode.Html, false, false, 0, rkmOpciones, new CancellationToken());
-                        await bot.SendStickerAsync(mensaje.Chat.Id, "https://s.tcdn.co/5dd/b4d/5ddb4dfa-b3eb-4bfe-8884-9af555e16c6f/192/1.png", true, 0, (IReplyMarkup)null, new CancellationToken());
+                        await bot.SendTextMessageAsync(mensaje.Chat.Id, sb.ToString(), ParseMode.Html, false, false, 0, new ReplyKeyboardRemove(), new CancellationToken());
+                        await bot.SendStickerAsync(mensaje.Chat.Id, this.strStickerOpciones, true, 0, rkmOpciones, new CancellationToken());
                         break;
                     case var expression when (strAceptar.Contains(strOp)):
-                        await bot.SendTextMessageAsync(mensaje.Chat.Id, "😊 En qué más te puedo ayudar❓", ParseMode.Html, false, false, mensaje.MessageId, rkmOpciones, new CancellationToken());
+                        sb.AppendFormat("😊 En qué más te puedo ayudar❓");
+                        await bot.SendTextMessageAsync(mensaje.Chat.Id, sb.ToString(), ParseMode.Html, false, false, mensaje.MessageId, new ReplyKeyboardRemove(), new CancellationToken());
+                        await bot.SendStickerAsync(mensaje.Chat.Id, this.strStickerOpciones, true, 0, rkmOpciones, new CancellationToken());
                         break;
                     case var expression when (strDetener.Contains(strOp)):
-                        sb.AppendFormat("👌 Las Alertas se encuentran Detenidas 😊.");
-                        sb.AppendLine();
-                        sb.AppendFormat("Te puedo ayudar con algo más❓");
-                        sb.AppendLine();
                         this.modificarParametro(false);
-                        await bot.SendTextMessageAsync(mensaje.Chat.Id, sb.ToString(), ParseMode.Html, false, false, mensaje.MessageId, rkmConfirmacion, new CancellationToken());
-                        await bot.SendStickerAsync(mensaje.Chat.Id, "https://s.tcdn.co/8b8/ab8/8b8ab835-6e72-4fee-8340-73dba6d204d8/192/9.png", false, 0, (IReplyMarkup)null, new CancellationToken());
+                        sb.AppendFormat("👌 Las Alertas se encuentran Detenidas 😊.");
+                        await bot.SendTextMessageAsync(mensaje.Chat.Id, sb.ToString(), ParseMode.Html, false, false, mensaje.MessageId, new ReplyKeyboardRemove(), new CancellationToken());
+                        await bot.SendStickerAsync(mensaje.Chat.Id, this.strStickerAceptar, false, 0, new ReplyKeyboardRemove(), new CancellationToken());
+                        sb = new StringBuilder();
+                        sb.AppendFormat("Te puedo ayudar con algo más❓");
+                        await bot.SendTextMessageAsync(mensaje.Chat.Id, sb.ToString(), ParseMode.Html, false, false, mensaje.MessageId, new ReplyKeyboardRemove(), new CancellationToken());
+                        await bot.SendStickerAsync(mensaje.Chat.Id, this.strStickerOpciones, false, 0, rkmConfirmacion, new CancellationToken());
                         break;
                     case var expression when (strIniciar.Contains(strOp)):
-                        sb.AppendFormat("👌 Las Alertas se encuentran Iniciadas 😊.");
-                        sb.AppendLine();
-                        sb.AppendFormat("Te puedo ayudar con algo más❓");
-                        sb.AppendLine();
                         this.modificarParametro(true);
-                        await bot.SendTextMessageAsync(mensaje.Chat.Id, sb.ToString(), ParseMode.Html, false, false, mensaje.MessageId, rkmConfirmacion, new CancellationToken());
-                        await bot.SendStickerAsync(mensaje.Chat.Id, "https://s.tcdn.co/8b8/ab8/8b8ab835-6e72-4fee-8340-73dba6d204d8/192/9.png", false, 0, (IReplyMarkup)null, new CancellationToken());
+                        sb.AppendFormat("👌 Las Alertas se encuentran Iniciadas 😊.");
+                        await bot.SendTextMessageAsync(mensaje.Chat.Id, sb.ToString(), ParseMode.Html, false, false, mensaje.MessageId, new ReplyKeyboardRemove(), new CancellationToken());
+                        await bot.SendStickerAsync(mensaje.Chat.Id, this.strStickerAceptar, false, 0, new ReplyKeyboardRemove(), new CancellationToken());
+                        sb = new StringBuilder();
+                        sb.AppendFormat("Te puedo ayudar con algo más❓");
+                        await bot.SendTextMessageAsync(mensaje.Chat.Id, sb.ToString(), ParseMode.Html, false, false, mensaje.MessageId, new ReplyKeyboardRemove(), new CancellationToken());
+                        await bot.SendStickerAsync(mensaje.Chat.Id, this.strStickerOpciones, false, 0, rkmConfirmacion, new CancellationToken());
                         break;
                     case var expression when (strActualizar.Contains(strOp)):
-                        sb.AppendFormat("👌 Los Parámetros se encuentran Actualizados 😊.");
-                        sb.AppendLine();
-                        sb.AppendFormat("Te puedo ayudar con algo más❓");
-                        sb.AppendLine();
                         this.actualizarParametro();
-                        await bot.SendTextMessageAsync(mensaje.Chat.Id, sb.ToString(), ParseMode.Html, false, false, mensaje.MessageId, rkmConfirmacion, new CancellationToken());
-                        await bot.SendStickerAsync(mensaje.Chat.Id, "https://s.tcdn.co/8b8/ab8/8b8ab835-6e72-4fee-8340-73dba6d204d8/192/9.png", true, 0, (IReplyMarkup)null, new CancellationToken());
+                        sb.AppendFormat("👌 Los Parámetros se encuentran Actualizados 😊.");
+                        await bot.SendTextMessageAsync(mensaje.Chat.Id, sb.ToString(), ParseMode.Html, false, false, mensaje.MessageId, new ReplyKeyboardRemove(), new CancellationToken());
+                        await bot.SendStickerAsync(mensaje.Chat.Id, this.strStickerAceptar, true, 0, new ReplyKeyboardRemove(), new CancellationToken());
+                        sb = new StringBuilder();
+                        sb.AppendFormat("Te puedo ayudar con algo más❓");
+                        await bot.SendTextMessageAsync(mensaje.Chat.Id, sb.ToString(), ParseMode.Html, false, false, mensaje.MessageId, new ReplyKeyboardRemove(), new CancellationToken());
+                        await bot.SendStickerAsync(mensaje.Chat.Id, this.strStickerOpciones, true, 0, rkmConfirmacion, new CancellationToken());
                         break;
                     case var expression when (strDespedir.Contains(strOp)):
-                        await bot.SendTextMessageAsync(mensaje.Chat.Id, "😊 Chao ‼, hasta luego 👋", ParseMode.Html, false, false, mensaje.MessageId, new ReplyKeyboardRemove(), new CancellationToken());
-                        await bot.SendStickerAsync(mensaje.Chat.Id, "https://s.tcdn.co/5dd/b4d/5ddb4dfa-b3eb-4bfe-8884-9af555e16c6f/192/1.png", false, 0, (IReplyMarkup)null, new CancellationToken());
+                        sb.AppendFormat("😊 Chao ‼, hasta luego 👋");
+                        await bot.SendTextMessageAsync(mensaje.Chat.Id, sb.ToString(), ParseMode.Html, false, false, mensaje.MessageId, new ReplyKeyboardRemove(), new CancellationToken());
+                        await bot.SendStickerAsync(mensaje.Chat.Id, this.strStickerDespedir, false, 0, new ReplyKeyboardRemove(), new CancellationToken());
                         break;
                     case var expression when (strReservado.Contains(strOp)):
+                        sb.AppendFormat("😪 Con eso no te puedo ayudar.");
+                        await bot.SendTextMessageAsync(mensaje.Chat.Id, sb.ToString(), ParseMode.Html, false, false, mensaje.MessageId, new ReplyKeyboardRemove(), new CancellationToken());
+                        await bot.SendStickerAsync(mensaje.Chat.Id, this.strStickerError, false, 0, new ReplyKeyboardRemove(), new CancellationToken());
+                        sb = new StringBuilder();
+                        sb.AppendFormat("Intenta con algunas de estas opciones 🙏");
+                        await bot.SendTextMessageAsync(mensaje.Chat.Id, sb.ToString(), ParseMode.Html, false, false, mensaje.MessageId, new ReplyKeyboardRemove(), new CancellationToken());
+                        await bot.SendStickerAsync(mensaje.Chat.Id, this.strStickerOpciones, false, 0, rkmOpciones, new CancellationToken());
                         break;
                     default:
                         sb.AppendFormat("😪 Con eso no te puedo ayudar.");
-                        sb.AppendLine();
+                        await bot.SendTextMessageAsync(mensaje.Chat.Id, sb.ToString(), ParseMode.Html, false, false, mensaje.MessageId, new ReplyKeyboardRemove(), new CancellationToken());
+                        await bot.SendStickerAsync(mensaje.Chat.Id, this.strStickerError, false, 0, new ReplyKeyboardRemove(), new CancellationToken());
+                        sb = new StringBuilder();
                         sb.AppendFormat("Intenta con algunas de estas opciones 🙏");
-                        sb.AppendLine();
-                        await bot.SendTextMessageAsync(mensaje.Chat.Id, sb.ToString(), ParseMode.Html, false, false, mensaje.MessageId, rkmOpciones, new CancellationToken());
+                        await bot.SendTextMessageAsync(mensaje.Chat.Id, sb.ToString(), ParseMode.Html, false, false, mensaje.MessageId, new ReplyKeyboardRemove(), new CancellationToken());
+                        await bot.SendStickerAsync(mensaje.Chat.Id, this.strStickerOpciones, false, 0, rkmOpciones, new CancellationToken());
                         break;
                 }
             }

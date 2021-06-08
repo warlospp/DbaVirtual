@@ -1,6 +1,0 @@
-﻿{
-  "#[Query] = ": "@database_id",
-  "#[Mensaje] = ": "@database_id",
-  "@[Id DB] = ": "@database_id",
-  "@[DB] = ": "@name"
-}

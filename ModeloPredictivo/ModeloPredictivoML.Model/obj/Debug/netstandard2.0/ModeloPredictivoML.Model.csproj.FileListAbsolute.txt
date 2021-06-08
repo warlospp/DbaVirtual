@@ -1,0 +1,9 @@
+C:\Users\warlo\source\repos\ModeloPredictivo\ModeloPredictivoML.Model\bin\Debug\netstandard2.0\MLModel.zip
+C:\Users\warlo\source\repos\ModeloPredictivo\ModeloPredictivoML.Model\bin\Debug\netstandard2.0\ModeloPredictivoML.Model.deps.json
+C:\Users\warlo\source\repos\ModeloPredictivo\ModeloPredictivoML.Model\bin\Debug\netstandard2.0\ModeloPredictivoML.Model.dll
+C:\Users\warlo\source\repos\ModeloPredictivo\ModeloPredictivoML.Model\bin\Debug\netstandard2.0\ModeloPredictivoML.Model.pdb
+C:\Users\warlo\source\repos\ModeloPredictivo\ModeloPredictivoML.Model\obj\Debug\netstandard2.0\ModeloPredictivoML.Model.AssemblyInfoInputs.cache
+C:\Users\warlo\source\repos\ModeloPredictivo\ModeloPredictivoML.Model\obj\Debug\netstandard2.0\ModeloPredictivoML.Model.AssemblyInfo.cs
+C:\Users\warlo\source\repos\ModeloPredictivo\ModeloPredictivoML.Model\obj\Debug\netstandard2.0\ModeloPredictivoML.Model.csproj.CoreCompileInputs.cache
+C:\Users\warlo\source\repos\ModeloPredictivo\ModeloPredictivoML.Model\obj\Debug\netstandard2.0\ModeloPredictivoML.Model.dll
+C:\Users\warlo\source\repos\ModeloPredictivo\ModeloPredictivoML.Model\obj\Debug\netstandard2.0\ModeloPredictivoML.Model.pdb

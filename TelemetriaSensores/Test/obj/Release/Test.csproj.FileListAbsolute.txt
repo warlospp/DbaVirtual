@@ -1,0 +1,13 @@
+C:\Users\warlo\source\repos\TelemetriaSensores\Test\bin\Release\Test.exe.config
+C:\Users\warlo\source\repos\TelemetriaSensores\Test\bin\Release\Test.exe
+C:\Users\warlo\source\repos\TelemetriaSensores\Test\bin\Release\Test.pdb
+C:\Users\warlo\source\repos\TelemetriaSensores\Test\bin\Release\Newtonsoft.Json.dll
+C:\Users\warlo\source\repos\TelemetriaSensores\Test\bin\Release\Newtonsoft.Json.xml
+C:\Users\warlo\source\repos\TelemetriaSensores\Test\obj\Release\Test.csprojAssemblyReference.cache
+C:\Users\warlo\source\repos\TelemetriaSensores\Test\obj\Release\Test.Form1.resources
+C:\Users\warlo\source\repos\TelemetriaSensores\Test\obj\Release\Test.Properties.Resources.resources
+C:\Users\warlo\source\repos\TelemetriaSensores\Test\obj\Release\Test.csproj.GenerateResource.cache
+C:\Users\warlo\source\repos\TelemetriaSensores\Test\obj\Release\Test.csproj.CoreCompileInputs.cache
+C:\Users\warlo\source\repos\TelemetriaSensores\Test\obj\Release\Test.csproj.CopyComplete
+C:\Users\warlo\source\repos\TelemetriaSensores\Test\obj\Release\Test.exe
+C:\Users\warlo\source\repos\TelemetriaSensores\Test\obj\Release\Test.pdb

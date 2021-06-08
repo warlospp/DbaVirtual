@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31019.35
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{82E667E1-C0AE-4EBD-9F19-C312F8A337FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{CE5A9088-B651-47F4-87BE-34AE67A7EC0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{27B981F4-0743-410E-AB06-7D750C24E946}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{A5B03358-58E4-4E8F-BFD2-8A126FB00464}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCF", "WCF\WCF.csproj", "{3FF2ED8F-0783-4B42-9CF6-08F77AC5B4F6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModeloPredictivoML.Model", "ModeloPredictivoML.Model\ModeloPredictivoML.Model.csproj", "{97CD1A9C-2D1C-4E33-9C94-207B5CF9D648}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModeloPredictivoML.ConsoleApp", "ModeloPredictivoML.ConsoleApp\ModeloPredictivoML.ConsoleApp.csproj", "{1F4A5E32-BE00-4897-87B0-55B081528F62}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82E667E1-C0AE-4EBD-9F19-C312F8A337FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82E667E1-C0AE-4EBD-9F19-C312F8A337FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82E667E1-C0AE-4EBD-9F19-C312F8A337FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82E667E1-C0AE-4EBD-9F19-C312F8A337FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE5A9088-B651-47F4-87BE-34AE67A7EC0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE5A9088-B651-47F4-87BE-34AE67A7EC0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE5A9088-B651-47F4-87BE-34AE67A7EC0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE5A9088-B651-47F4-87BE-34AE67A7EC0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27B981F4-0743-410E-AB06-7D750C24E946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27B981F4-0743-410E-AB06-7D750C24E946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27B981F4-0743-410E-AB06-7D750C24E946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27B981F4-0743-410E-AB06-7D750C24E946}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5B03358-58E4-4E8F-BFD2-8A126FB00464}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5B03358-58E4-4E8F-BFD2-8A126FB00464}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5B03358-58E4-4E8F-BFD2-8A126FB00464}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5B03358-58E4-4E8F-BFD2-8A126FB00464}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FF2ED8F-0783-4B42-9CF6-08F77AC5B4F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FF2ED8F-0783-4B42-9CF6-08F77AC5B4F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FF2ED8F-0783-4B42-9CF6-08F77AC5B4F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FF2ED8F-0783-4B42-9CF6-08F77AC5B4F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97CD1A9C-2D1C-4E33-9C94-207B5CF9D648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97CD1A9C-2D1C-4E33-9C94-207B5CF9D648}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97CD1A9C-2D1C-4E33-9C94-207B5CF9D648}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97CD1A9C-2D1C-4E33-9C94-207B5CF9D648}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F4A5E32-BE00-4897-87B0-55B081528F62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F4A5E32-BE00-4897-87B0-55B081528F62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F4A5E32-BE00-4897-87B0-55B081528F62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F4A5E32-BE00-4897-87B0-55B081528F62}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1C2B94E0-9C99-4042-8A42-A9CC1717C766}
+	EndGlobalSection
+EndGlobal

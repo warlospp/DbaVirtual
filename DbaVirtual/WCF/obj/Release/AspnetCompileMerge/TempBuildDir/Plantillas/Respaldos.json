@@ -1,0 +1,9 @@
+﻿{
+  "#Mensaje": "👇 Respaldos de las Bases de Datos de la Instancia 👉 @@instancia 👇",
+  "<b><a><u>@[Db]</u></a></b> = ": "👉 {@name}",
+  "<b><a>@[Estado]</a></b> = ": "@state_desc",
+  "<b><a>@[Modo]</a></b> = ": "@recovery_model_desc",
+  "<b><a>@[Full]</a></b> = ": "@Full",
+  "<b><a>@[Diff]</a></b> = ": "@Diff",
+  "<b><a>@[Log]</a></b> = ": "@Log"
+}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DTO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="parOpcion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arbySentencia" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="intCrud" type="xs:int" />
+      <xs:element minOccurs="0" name="intOpcion" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="strNombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="strPlantilla" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="strUsuario" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="parOpcion" nillable="true" type="tns:parOpcion" />
+  <xs:complexType name="ArrayOfdtoOpcion">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dtoOpcion" nillable="true" type="tns:dtoOpcion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdtoOpcion" nillable="true" type="tns:ArrayOfdtoOpcion" />
+  <xs:complexType name="dtoOpcion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arbySentencia" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="intOpcion" type="xs:int" />
+      <xs:element minOccurs="0" name="strNombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="strPlantilla" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dtoOpcion" nillable="true" type="tns:dtoOpcion" />
+  <xs:complexType name="ArrayOfdtoInstancia">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dtoInstancia" nillable="true" type="tns:dtoInstancia" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdtoInstancia" nillable="true" type="tns:ArrayOfdtoInstancia" />
+  <xs:complexType name="dtoInstancia">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="intServidor" type="xs:int" />
+      <xs:element minOccurs="0" name="strAlias" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="strInstancia" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dtoInstancia" nillable="true" type="tns:dtoInstancia" />
+</xs:schema>

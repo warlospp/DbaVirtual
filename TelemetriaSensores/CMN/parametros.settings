@@ -68,5 +68,8 @@
     <Setting Name="ConectorSql" Type="System.String" Scope="Application">
       <Value Profile="(Default)">ConectorSql</Value>
     </Setting>
+    <Setting Name="Presion" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Presión</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

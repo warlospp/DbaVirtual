@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="wcfChatBot" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:54889/wcfChatBot.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:54889/wcfChatBot.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:54889/wcfChatBot.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DTO" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IwcfChatBot_opciones_InputMessage">
+    <wsdl:part name="parameters" element="tns:opciones" />
+  </wsdl:message>
+  <wsdl:message name="IwcfChatBot_opciones_OutputMessage">
+    <wsdl:part name="parameters" element="tns:opcionesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IwcfChatBot_cargarInstancias_InputMessage">
+    <wsdl:part name="parameters" element="tns:cargarInstancias" />
+  </wsdl:message>
+  <wsdl:message name="IwcfChatBot_cargarInstancias_OutputMessage">
+    <wsdl:part name="parameters" element="tns:cargarInstanciasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IwcfChatBot_cargarMensaje_InputMessage">
+    <wsdl:part name="parameters" element="tns:cargarMensaje" />
+  </wsdl:message>
+  <wsdl:message name="IwcfChatBot_cargarMensaje_OutputMessage">
+    <wsdl:part name="parameters" element="tns:cargarMensajeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IwcfChatBot">
+    <wsdl:operation name="opciones">
+      <wsdl:input wsaw:Action="http://tempuri.org/IwcfChatBot/opciones" message="tns:IwcfChatBot_opciones_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IwcfChatBot/opcionesResponse" message="tns:IwcfChatBot_opciones_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="cargarInstancias">
+      <wsdl:input wsaw:Action="http://tempuri.org/IwcfChatBot/cargarInstancias" message="tns:IwcfChatBot_cargarInstancias_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IwcfChatBot/cargarInstanciasResponse" message="tns:IwcfChatBot_cargarInstancias_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="cargarMensaje">
+      <wsdl:input wsaw:Action="http://tempuri.org/IwcfChatBot/cargarMensaje" message="tns:IwcfChatBot_cargarMensaje_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IwcfChatBot/cargarMensajeResponse" message="tns:IwcfChatBot_cargarMensaje_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:service name="wcfChatBot" />
+</wsdl:definitions>

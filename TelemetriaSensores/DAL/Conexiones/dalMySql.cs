@@ -1,7 +1,6 @@
-﻿using MySql.Data.MySqlClient;
+﻿using MySqlConnector;
 using System;
 using System.Data;
-
 namespace DAL.Conexiones
 {
     public class dalMySql : IDisposable
