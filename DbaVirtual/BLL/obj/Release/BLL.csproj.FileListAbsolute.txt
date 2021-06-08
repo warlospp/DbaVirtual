@@ -11,17 +11,3 @@ C:\Users\warlo\source\repos\DTO\BLL\obj\Release\BLL.csproj.CoreCompileInputs.cac
 C:\Users\warlo\source\repos\DTO\BLL\obj\Release\BLL.csproj.CopyComplete
 C:\Users\warlo\source\repos\DTO\BLL\obj\Release\BLL.dll
 C:\Users\warlo\source\repos\DTO\BLL\obj\Release\BLL.pdb
-C:\Users\warlo\source\repos\DbaVirtual\BLL\bin\Release\BLL.dll.config
-C:\Users\warlo\source\repos\DbaVirtual\BLL\bin\Release\BLL.dll
-C:\Users\warlo\source\repos\DbaVirtual\BLL\bin\Release\BLL.pdb
-C:\Users\warlo\source\repos\DbaVirtual\BLL\bin\Release\DAL.dll
-C:\Users\warlo\source\repos\DbaVirtual\BLL\bin\Release\DTO.dll
-C:\Users\warlo\source\repos\DbaVirtual\BLL\bin\Release\Newtonsoft.Json.dll
-C:\Users\warlo\source\repos\DbaVirtual\BLL\bin\Release\DAL.pdb
-C:\Users\warlo\source\repos\DbaVirtual\BLL\bin\Release\DTO.pdb
-C:\Users\warlo\source\repos\DbaVirtual\BLL\bin\Release\Newtonsoft.Json.xml
-C:\Users\warlo\source\repos\DbaVirtual\BLL\obj\Release\BLL.csprojAssemblyReference.cache
-C:\Users\warlo\source\repos\DbaVirtual\BLL\obj\Release\BLL.csproj.CoreCompileInputs.cache
-C:\Users\warlo\source\repos\DbaVirtual\BLL\obj\Release\BLL.csproj.CopyComplete
-C:\Users\warlo\source\repos\DbaVirtual\BLL\obj\Release\BLL.dll
-C:\Users\warlo\source\repos\DbaVirtual\BLL\obj\Release\BLL.pdb

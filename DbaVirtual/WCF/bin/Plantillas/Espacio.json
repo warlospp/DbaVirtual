@@ -1,8 +1,0 @@
-﻿{
-  "#Mensaje": "👇 Espacio de las Bases de Datos de la Instancia 👉 @@instancia 👇",
-  "<b><a><u>@[Db]</u></a></b> = ": "👉 {@Dbname}",
-  "<b><a>@[Tipo]</a></b> = ": "@type",
-  "<b><a>@[Total] (MB)</a></b> = ": "@file_Size_MB",
-  "<b><a>@[Usado] (MB)</a></b> = ": "@Space_Used_MB",
-  "<b><a>@[Disponible] (MB)</a></b> = ": "@Free_Space_MB"
-}

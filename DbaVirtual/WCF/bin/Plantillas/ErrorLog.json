@@ -1,6 +1,0 @@
-﻿{
-  "#Mensaje": "👇 Mensajes en SQL Error Log de la Instancia 👉 @@instancia 👇",
-  "<b><a>@[Fecha]</a></b> = ": "<code>@LogDate</code>",
-  "<b><a>@[Tipo]</a></b> = ": "👉 {@ProcessInfo}",
-  "<b><a>@[Mensaje]</a></b> = ": "@text"
-}

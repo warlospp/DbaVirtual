@@ -3,8 +3,3 @@ C:\Users\warlo\source\repos\DTO\DTO\bin\Release\DTO.pdb
 C:\Users\warlo\source\repos\DTO\DTO\obj\Release\DTO.csproj.CoreCompileInputs.cache
 C:\Users\warlo\source\repos\DTO\DTO\obj\Release\DTO.dll
 C:\Users\warlo\source\repos\DTO\DTO\obj\Release\DTO.pdb
-C:\Users\warlo\source\repos\DbaVirtual\DTO\bin\Release\DTO.dll
-C:\Users\warlo\source\repos\DbaVirtual\DTO\bin\Release\DTO.pdb
-C:\Users\warlo\source\repos\DbaVirtual\DTO\obj\Release\DTO.csproj.CoreCompileInputs.cache
-C:\Users\warlo\source\repos\DbaVirtual\DTO\obj\Release\DTO.dll
-C:\Users\warlo\source\repos\DbaVirtual\DTO\obj\Release\DTO.pdb
